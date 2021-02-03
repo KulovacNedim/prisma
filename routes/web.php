@@ -15,4 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/store', function () {
+    $data = ['name' => 'Elektrprizma'];
+    return view('store', $data);
+})->name("store");
