@@ -41,6 +41,15 @@
                     <div class="ml-12">
                         Store: {{ $name }}
                     </div>
+                    <hr>
+
+                    <div class="ml-12">
+                        @foreach($products as $product)
+                        <a href="/products/{{ $product->id }}">
+                            <p>{{ $product->name }}</p>
+                        </a>
+                        @endforeach
+                    </div>
 
                 </div>
             </div>
