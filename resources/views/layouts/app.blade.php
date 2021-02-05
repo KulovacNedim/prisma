@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/7f799c9eb6.js" crossorigin="anonymous"></script>
 
+
     <style>
         body {
             font-family: 'Nunito';
@@ -29,6 +30,17 @@
 
         .w3-bar .w3-button {
             padding: 16px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .invalid-feedback {
+            display: block;
+            margin-top: -5;
+            margin-bottom: 22px;
+            color: red;
         }
     </style>
 </head>
@@ -72,37 +84,36 @@
             <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
         </nav>
 
+    </div>
+    <main class="" style="margin-top: 60px;">
+        @yield('content')
+    </main>
+    <script>
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
 
-        <main class="py-4">
-            @yield('content')
-        </main>
 
-        <script>
-            // Modal Image Gallery
-            function onClick(element) {
-                document.getElementById("img01").src = element.src;
-                document.getElementById("modal01").style.display = "block";
-                var captionText = document.getElementById("caption");
-                captionText.innerHTML = element.alt;
+        // Toggle between showing and hiding the sidebar when clicking the menu icon
+        var mySidebar = document.getElementById("mySidebar");
+
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+            } else {
+                mySidebar.style.display = 'block';
             }
+        }
 
-
-            // Toggle between showing and hiding the sidebar when clicking the menu icon
-            var mySidebar = document.getElementById("mySidebar");
-
-            function w3_open() {
-                if (mySidebar.style.display === 'block') {
-                    mySidebar.style.display = 'none';
-                } else {
-                    mySidebar.style.display = 'block';
-                }
-            }
-
-            // Close the sidebar with the close button
-            function w3_close() {
-                mySidebar.style.display = "none";
-            }
-        </script>
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+        }
+    </script>
 </body>
 
 </html>
