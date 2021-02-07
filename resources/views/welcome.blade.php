@@ -17,5 +17,6 @@
     </div>
     @endif -->
 dsds
+<a href="{{ route('admin.users.index') }}">User Management</a>
 
 @endsection
