@@ -2,43 +2,44 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <div class="w3-row w3-margin">
+    </div>
+    <div class="w3-row">
+        <div>
+            <div class="w3-modal-content w3-card-4" style="max-width:600px">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                <div class="w3-center"><br>
+                    <img src="https://www.w3schools.com/w3css/img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+                </div>
+                <div class="w3-center"><br>
+                    <h3>RESET PASSWORDA</h3>
+                </div>
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+                @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+                @endif
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                <form class="w3-container" method="POST" action="{{ route('password.email') }}">
+                    @csrf
+                    <div class="w3-section">
+                        <label><b>e-mail adresa</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Unesite e-mail adresu" name="email" value="{{ old('email') }}" required>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Pošalji novi password</button>
+                    </div>
+                </form>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey w3-hide-small">
+                    <span class="w3-left w3-padding s6"><a class="btn btn-link" href="{{ route('login') }}">
+                            {{ __('Forma za login') }}
+                        </a></span>
                 </div>
             </div>
         </div>

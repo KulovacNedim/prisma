@@ -26,6 +26,11 @@
     <style>
         body {
             font-family: 'Nunito';
+            background-color: #f7f8f9;
+        }
+
+        .w3-button {
+            width: 150px;
         }
 
         .w3-bar .w3-button {
@@ -50,7 +55,7 @@
     <!-- Navbar (sit on top) -->
     <div class="w3-top">
         <div class="w3-bar w3-white w3-card" id="myNavbar">
-            <a href="#home" class="w3-bar-item w3-button w3-wide">ELEKTROPRIZMA</a>
+            <a href="{{ route('welcome') }}" class="w3-bar-item w3-button w3-wide">ELEKTROPRIZMA</a>
             <!-- Right-sided navbar links -->
             <div class="w3-right w3-hide-small">
                 <div class="w3-dropdown-hover">
