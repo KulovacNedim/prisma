@@ -29,6 +29,10 @@
             background-color: #f7f8f9;
         }
 
+        .w3-button {
+            width: 150px;
+        }
+
         .w3-bar .w3-button {
             padding: 16px;
         }
