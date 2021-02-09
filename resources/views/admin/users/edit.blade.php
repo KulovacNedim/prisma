@@ -13,17 +13,26 @@
       {{ method_field('PUT')}}
       <p>
         <label>Ime</label>
-        <input class="w3-input" type="text" name="name" value="{{ $user->name }}">
+        <input class="w3-input" type="text" placeholder="Unesite ime" name="name" value="{{ $user->name }}" required>
+        @error('name')
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ $message }}</strong>
+        </span>
+        @enderror
       </p>
       <p>
         <label>email</label>
-        <input class="w3-input" type="text" name="email" value="{{ $user->email }}">
+        <input class="w3-input" type="text" placeholder="Unesite email" name="email" value="{{ $user->email }}" required>
+        @error('email')
+        <span class="invalid-feedback" role="alert">
+          <strong>{{ $message }}</strong>
+        </span>
+        @enderror
       </p>
-
       <h3 style="display: inline-block; margin-right: 20px">Role: </h3>
       @foreach($roles as $role)
       <span style="margin-right: 25px;">
-        <input class="w3-check" type="checkbox" name="roles[]" value="{{ $role->id }}" {{ $user->roles->contains($role) ? 'checked' : '' }}>
+        <input class="w3-check" type="checkbox" name="roles[]" value="{{ $role->id }}" @if($user->roles->pluck('id')->contains($role->id)) checked @endif>
         <label>{{ $role->name }}</label>
       </span>
       @endforeach

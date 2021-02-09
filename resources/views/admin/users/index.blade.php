@@ -17,12 +17,16 @@
       <td> {{ $user->email }}</td>
       <td> {{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
       <td class="w3-right-align">
+        @can('edit-users')
         <a href="{{ route('admin.users.edit', $user->id) }}"><button class="w3-button w3-blue w3-small w3-hover-red">Edit</button></a>
-        <form action="{{ route('admin.users.destroy', $user) }}" method="POST" style="display: inline-block;" onclick="console.log(999)">
+        @endcan
+        @can('delete-users')
+        <form action="{{ route('admin.users.destroy', $user) }}" method="POST" style="display: inline-block;">
           @csrf
           {{ method_field('DELETE') }}
           <button type="submit" class="w3-button w3-pink w3-small w3-hover-red">Delete</button>
         </form>
+        @endcan
       </td>
     </tr>
     @endforeach
