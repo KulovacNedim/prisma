@@ -56,8 +56,13 @@ class UserController extends Controller
     {
         $user->name = request('name');
         $user->email = request('email');
-        $user->save();
-        $user->roles()->sync($request->roles);
+
+        if ($user->save() && $user->roles()->sync($request->roles)) {
+            $request->session()->flash('success', 'Promjene za korisnika ' . $user->name . ' sačuvane');
+        } else {
+            $request->session()->flash('error', 'Desila se greška. Promjene nisu sačuvane.');
+        }
+
         return redirect()->route('admin.users.index');
     }
 
@@ -67,14 +72,20 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
         if (Gate::denies('delete-users')) {
             return redirect(route('admin.users.index'));
         }
 
         $user->roles()->detach();
-        $user->delete();
+
+        if ($user->delete()) {
+            $request->session()->flash('success', 'Korisnik ' . $user->name . ' izbrisan');
+        } else {
+            $request->session()->flash('error', 'Desila se greška. Promjene nisu sačuvane.');
+        }
+
         return redirect()->route('admin.users.index');
     }
 }

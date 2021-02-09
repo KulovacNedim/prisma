@@ -91,6 +91,7 @@
 
     </div>
     <main class="" style="margin-top: 60px;">
+        @include('partials.alerts')
         @yield('content')
     </main>
     <script>
