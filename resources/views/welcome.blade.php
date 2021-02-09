@@ -16,7 +16,8 @@
         @endauth
     </div>
     @endif -->
-dsds
+<p>content...</p>
+@can('manage-users')
 <a href="{{ route('admin.users.index') }}">User Management</a>
-
+@endcan
 @endsection
