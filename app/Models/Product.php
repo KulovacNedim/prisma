@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $casts = [
-        'colors' => 'array'
-    ];
+
+    public function presentPrice()
+    {
+        return $this->price . ' KM';
+    }
 }

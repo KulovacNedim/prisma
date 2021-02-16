@@ -29,6 +29,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop/{product}/{slug}', [App\Http\Controllers\ShopController::class, 'show'])->name('shop.show');
+
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
     Route::resource('/users', 'UserController', ['except' => ['show', 'create', 'store']]);
 });

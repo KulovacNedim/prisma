@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class UsersTableSeeder extends Seeder
 {
@@ -17,8 +18,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         User::truncate();
-        DB::table('role_user')->truncate();
 
         $adminRole = Role::where('name', 'admin')->first();
         $ceoRole = Role::where('name', 'ceo')->first();
