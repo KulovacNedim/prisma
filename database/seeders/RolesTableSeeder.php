@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Role;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class RolesTableSeeder extends Seeder
 {
@@ -14,6 +16,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         Role::truncate();
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'ceo']);
