@@ -47,7 +47,16 @@
             margin-bottom: 22px;
             color: red;
         }
+
+        .w3-sidebar {
+            z-index: 3;
+            width: 250px;
+            top: 60px;
+            bottom: 0;
+            height: inherit;
+        }
     </style>
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css">
 </head>
 
 <body>
@@ -90,7 +99,7 @@
         </nav>
 
     </div>
-    <main class="" style="margin-top: 60px;">
+    <main class="" style="margin-top: 100px;">
         @include('partials.alerts')
         @yield('content')
     </main>
