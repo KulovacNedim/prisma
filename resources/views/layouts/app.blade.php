@@ -56,7 +56,8 @@
             height: inherit;
         }
     </style>
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css">
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css"> -->
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 </head>
 
 <body>
@@ -99,7 +100,7 @@
         </nav>
 
     </div>
-    <main class="" style="margin-top: 100px;">
+    <main class="" style="margin-top: 80px;">
         @include('partials.alerts')
         @yield('content')
     </main>

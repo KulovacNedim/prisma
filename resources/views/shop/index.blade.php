@@ -3,15 +3,15 @@
 @section('content')
 <div>
   <!-- Sidebar -->
-  <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-d4 w3-animate-left" id="categoriesSidebar">
+  <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-d3 w3-animate-left" id="categoriesSidebar">
     <a href="javascript:void(0)" onclick="w3_close_categories()" class="w3-right w3-xlarge w3-padding-large w3-hide-large" title="Close Menu">
       <i class="fa fa-remove"></i>
     </a>
-    <h4 class="w3-bar-item"><b>Kategorije</b></h4>
-    <a class="w3-bar-item w3-button w3-hover-yellow " href="#">Unutrasnja rasvjeta</a>
-    <a class="w3-bar-item w3-button w3-hover-yellow" href="#">Prigusnice</a>
-    <a class="w3-bar-item w3-button w3-hover-yellow" href="#">Elektromaterijal</a>
-    <a class="w3-bar-item w3-button w3-hover-yellow" href="#">Reflektori</a>
+    <h4 class="w3-bar-item w3-white w3-theme-d3"><b>Kategorije</b></h4>
+    <a class="w3-bar-item w3-button w3-hover-orange " href="#">Unutrasnja rasvjeta</a>
+    <a class="w3-bar-item w3-button w3-hover-orange" href="#">Prigusnice</a>
+    <a class="w3-bar-item w3-button w3-hover-orange" href="#">Elektromaterijal</a>
+    <a class="w3-bar-item w3-button w3-hover-orange" href="#">Reflektori</a>
   </nav>
 </div>
 
@@ -25,6 +25,7 @@
 
   <div class="w3-row">
     <div class="w3-container">
+      <h2>Unutrasnja rasvjeta</h2>
       @foreach($products as $product)
       <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
         <div class="w3-col w3-container m4 l3 w3-padding-16 ">
@@ -37,7 +38,15 @@
               </b>
               <div class="w3-section w3-left-align">
                 <span>{{ $product->presentPrice() }}</span>
-                <span style="float: right;"><button class="w3-button w3-red w3-hover-yellow w3-tiny">Dodaj na listu za upit</button></span>
+                <span style="float: right;">
+                  <form action="{{ route('cart.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $product->id }}" />
+                    <input type="hidden" name="name" value="{{ $product->name }}" />
+                    <input type="hidden" name="price" value="{{ $product->price }}" />
+                    <button class="w3-button w3-blue w3-hover-amber w3-tiny" type="submit">Dodaj na listu za upit</button>
+                  </form>
+                </span>
               </div>
 
             </div>
