@@ -31,6 +31,10 @@ class ShopController extends Controller
     public function show($productId, $slug)
     {
         $product = Product::where('id', $productId)->firstOrFail();
-        return view('shop.show')->with('product', $product);
+        $mightAlsoLike = Product::where('id', '!=', $productId)->mightAlsoLike()->get();
+        return view('shop.show')->with([
+            'product' => $product,
+            'mightAlsoLike' => $mightAlsoLike
+        ]);
     }
 }

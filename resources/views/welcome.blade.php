@@ -16,8 +16,10 @@
         @endauth
     </div>
     @endif -->
-<p>content...</p>
+
 @can('manage-users')
-<a href="{{ route('admin.users.index') }}">User Management</a>
+<a href="{{ route('admin.users.index') }}">User Management</a><br>
 @endcan
+<a href="{{ route('shop.index') }}">Shop</a>
+<a href="{{ route('cart.index') }}">Cart</a>
 @endsection
