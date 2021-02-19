@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -19,7 +20,11 @@ class CartController extends Controller
         foreach (Cart::content() as $item) {
             $totalPrice = $totalPrice + $item->price;
         };
-        return view('cart.index')->with('priceWithDelivary', $totalPrice + 7);
+        $mightAlsoLike = Product::mightAlsoLike()->get();
+        return view('cart.index')->with([
+            'mightAlsoLike' => $mightAlsoLike,
+            'priceWithDelivary' => $totalPrice + 7
+        ]);
     }
 
     /**
@@ -45,13 +50,15 @@ class CartController extends Controller
         });
 
         if ($duplicates->isNotEmpty()) {
-            return redirect()->route('cart.index')->with('success_message', 'Artikal je već na listi');
+            $request->session()->flash('warning', 'Artikal je već na listi');
+            return redirect()->route('cart.index');
         }
 
         Cart::add($request->id, $request->name, 1, $request->price)
             ->associate('\App\Models\Product');
 
-        return redirect()->route('cart.index')->with('success_message', 'Artikal je dodan na listu za upit');
+        $request->session()->flash('success', 'Artikal je dodan na listu za upit');
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -98,6 +105,7 @@ class CartController extends Controller
     {
         Cart::remove($id);
 
-        return back()->with('success_message', 'Artikal je izbrisan sa liste');
+        Session::flash('success', 'Artikal je izbrisan sa liste');
+        return back();
     }
 }

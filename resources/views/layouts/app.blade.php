@@ -101,7 +101,7 @@
 
     </div>
     <main class="" style="margin-top: 80px;">
-        @include('partials.alerts')
+        <!-- @include('partials.alerts') -->
         @yield('content')
     </main>
     <script>
