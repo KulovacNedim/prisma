@@ -35,6 +35,7 @@ Route::get('/shop/{product}/{slug}', [App\Http\Controllers\ShopController::class
 
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
+Route::delete('/cart/{product}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
 Route::get('/empty', function () {
     Cart::destroy();
 });

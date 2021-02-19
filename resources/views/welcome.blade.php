@@ -22,4 +22,7 @@
 @endcan
 <a href="{{ route('shop.index') }}">Shop</a>
 <a href="{{ route('cart.index') }}">Cart</a>
-@endsection
+
+<hr>
+@if(Cart::instance('default')->count() < 1) Nema artikala na listi @endif na listi ima {{ Cart::instance('default')->count() }} artikala <hr>
+    @endsection
