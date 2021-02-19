@@ -15,7 +15,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart.index');
+        $totalPrice = 0;
+        foreach (Cart::content() as $item) {
+            $totalPrice = $totalPrice + $item->price;
+        };
+        return view('cart.index')->with('priceWithDelivary', $totalPrice + 7);
     }
 
     /**
@@ -36,6 +40,14 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
+            return $cartItem->id === $request->id;
+        });
+
+        if ($duplicates->isNotEmpty()) {
+            return redirect()->route('cart.index')->with('success_message', 'Artikal je već na listi');
+        }
+
         Cart::add($request->id, $request->name, 1, $request->price)
             ->associate('\App\Models\Product');
 
@@ -84,6 +96,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::remove($id);
+
+        return back()->with('success_message', 'Artikal je izbrisan sa liste');
     }
 }
