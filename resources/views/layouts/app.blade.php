@@ -130,6 +130,8 @@
             mySidebar.style.display = "none";
         }
     </script>
+
+    @yield('extra-js')
 </body>
 
 </html>

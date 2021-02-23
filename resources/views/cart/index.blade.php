@@ -64,8 +64,13 @@
               <span class="w3-hide-small">{{ $item->model->shortDescription }}</span>
             </div>
           </a>
+          <div class="w3-bar-item w3-right" style="min-width: 130px">
+            <span class="w3-large w3-right">{{ $item->subtotal }} KM</span>
+          </div>
           <div class="w3-bar-item w3-right">
-            <span class="w3-large">{{ $item->model->presentPrice() }}</span>
+            <span class="w3-large">
+              <input type="text" value="{{ $item-> qty }}" data-id="{{ $item->rowId }}" class="quantity" style="width: 80px; text-align: right">
+            </span>
           </div>
         </li>
         @endforeach
@@ -124,4 +129,38 @@
 </div>
 @endif
 
+@endsection
+
+@section('extra-js')
+<script src="{{ asset('js/app.js') }}"></script>
+<script>
+  (function() {
+    const classname = document.querySelectorAll('.quantity')
+
+    const articles = Array.from(classname);
+
+    articles.forEach(function(elem) {
+      elem.addEventListener('keyup', function() {
+
+        const that = this;
+
+        function timer() {
+          const id = elem.getAttribute('data-id');
+          console.log(that.value)
+          axios.patch(`/cart/${id}`, {
+              quantity: that.value
+            })
+            .then(function(res) {
+              window.location.href = "{{ route('cart.index') }}"
+            })
+            .catch(function(err) {
+              console.log(err);
+            })
+        }
+
+        setTimeout(timer, 300);
+      })
+    })
+  })();
+</script>
 @endsection
