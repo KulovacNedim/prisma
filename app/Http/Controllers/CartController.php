@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -92,7 +93,16 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'quantity' => 'required|integer'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('error', 'Kolicina mora biti cijeli broj');
+        }
+
+        Cart::update($id, $request->quantity);
+        return response()->json(['success' => true]);
     }
 
     /**
