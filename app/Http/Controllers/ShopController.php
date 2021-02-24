@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -14,10 +15,24 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        $data = ['products' => $products];
+        if (request()->id) {
+            $categories = Category::all();
+            $products = Product::with('categories')->whereHas('categories', function ($query) {
+                $query->where('category_id', request()->id);
+            })->get();
+            $categoryName = $categories->where('slug', request()->category);
+            $categoryName = $categoryName->first() ? $categoryName->first()->name : 'Nepostoji kategorija ' . request()->category;
+        } else {
+            $categories = Category::all();
+            $products = Product::all();
+            $categoryName = 'Svi artikli';
+        }
 
-        return view('shop.index', $data);
+        return view('shop.index')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'categoryName' => $categoryName,
+        ]);
     }
 
 

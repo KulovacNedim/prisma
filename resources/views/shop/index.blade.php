@@ -8,10 +8,9 @@
       <i class="fa fa-remove"></i>
     </a>
     <h4 class="w3-bar-item w3-white w3-theme-d3"><b>Kategorije</b></h4>
-    <a class="w3-bar-item w3-button w3-hover-orange " href="#">Unutrasnja rasvjeta</a>
-    <a class="w3-bar-item w3-button w3-hover-orange" href="#">Prigusnice</a>
-    <a class="w3-bar-item w3-button w3-hover-orange" href="#">Elektromaterijal</a>
-    <a class="w3-bar-item w3-button w3-hover-orange" href="#">Reflektori</a>
+    @foreach($categories as $category)
+    <a class="w3-bar-item w3-button w3-hover-orange {{ $category->name ==  $categoryName ? 'w3-orange' : ''  }}" href="{{ route('shop.index', ['id' => $category->id, 'category' => $category->slug]) }}">{{ $category->name }}</a>
+    @endforeach
   </nav>
 </div>
 
@@ -25,8 +24,8 @@
 
   <div class="w3-row">
     <div class="w3-container">
-      <h2>Unutrasnja rasvjeta</h2>
-      @foreach($products as $product)
+      <h2>{{ $categoryName }}</h2>
+      @forelse($products as $product)
       <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
         <div class="w3-col w3-container m4 l3 w3-padding-16 ">
           <div class="w3-card-4 m5 l5">
@@ -53,7 +52,9 @@
           </div>
         </div>
       </a>
-      @endforeach
+      @empty
+      <div>Kategorija trenutno ne sadrži artikle</div>
+      @endforelse
     </div>
   </div>
 
