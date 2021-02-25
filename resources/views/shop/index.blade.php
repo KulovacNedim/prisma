@@ -55,7 +55,9 @@
       @empty
       <div>Kategorija trenutno ne sadrži artikle</div>
       @endforelse
+
     </div>
+    {{ $products->appends(request()->input())->links() }}
   </div>
 
   <!-- END MAIN -->
