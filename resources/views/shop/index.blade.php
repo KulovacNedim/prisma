@@ -57,7 +57,9 @@
       @endforelse
 
     </div>
-    {{ $products->appends(request()->input())->links() }}
+    <div class="w3-row w3-center w3-margin-top w3-margin-bottom">
+      {{ $products->appends(request()->input())->links() }}
+    </div>
   </div>
 
   <!-- END MAIN -->

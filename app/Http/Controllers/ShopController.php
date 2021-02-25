@@ -15,7 +15,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $pagination = 3;
+        $pagination = 10;
         $categories = Category::all();
 
         if (request()->id) {
