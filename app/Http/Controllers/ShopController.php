@@ -15,16 +15,17 @@ class ShopController extends Controller
      */
     public function index()
     {
+        $pagination = 10;
+        $categories = Category::all();
+
         if (request()->id) {
-            $categories = Category::all();
             $products = Product::with('categories')->whereHas('categories', function ($query) {
                 $query->where('category_id', request()->id);
-            })->get();
+            })->paginate($pagination);
             $categoryName = $categories->where('slug', request()->category);
             $categoryName = $categoryName->first() ? $categoryName->first()->name : 'Nepostoji kategorija ' . request()->category;
         } else {
-            $categories = Category::all();
-            $products = Product::all();
+            $products = Product::paginate($pagination);
             $categoryName = 'Svi artikli';
         }
 
