@@ -15,7 +15,7 @@ class CreateForeignKeysForCategorYProductTable extends Migration
     {
         Schema::table('category_product', function (Blueprint $table) {
             $table->foreign('product_id')->references('id')->on('products')->OnDestroy('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->OnDestroy('cascade');
+            $table->foreign('category_id')->references('id')->on('category')->OnDestroy('cascade');
         });
     }
 
