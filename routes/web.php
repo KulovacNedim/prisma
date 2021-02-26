@@ -41,6 +41,11 @@ Route::get('/empty', function () {
     Cart::destroy();
 });
 
-Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
-    Route::resource('/users', 'UserController', ['except' => ['show', 'create', 'store']]);
+// Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
+//     Route::resource('/users', 'UserController', ['except' => ['show', 'create', 'store']]);
+// });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
 });

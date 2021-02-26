@@ -21,7 +21,7 @@
         <h1 style="margin-top: 0; font-weight:bold">{{ $product->presentPrice() }}</h1>
       </div>
 
-      <p style="margin-top: 25px;">{{ $product->description }}</p>
+      <p style="margin-top: 25px;">{!! $product->description !!}</p>
       <form action="{{ route('cart.store') }}" method="POST">
         @csrf
         <input type="hidden" name="id" value="{{ $product->id }}" />
