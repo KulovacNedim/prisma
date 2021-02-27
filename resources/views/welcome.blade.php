@@ -20,9 +20,3 @@
 @can('manage-users')
 <a href="{{ route('admin.users.index') }}">User Management</a><br>
 @endcan
-<a href="{{ route('shop.index') }}">Shop</a>
-<a href="{{ route('cart.index') }}">Cart</a>
-
-<hr>
-@if(Cart::instance('default')->count() < 1) Nema artikala na listi @endif na listi ima {{ Cart::instance('default')->count() }} artikala <hr>
-    @endsection
