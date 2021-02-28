@@ -30,7 +30,7 @@
         <div class="w3-col w3-container m4 l3 w3-padding-16 ">
           <div class="w3-card-4 m5 l5">
 
-            <img width="100%" src="{{ pathinfo('img/products/'.$product->imageUrl.'.jpg', PATHINFO_EXTENSION) == 'jpg' ? asset('img/products/'.$product->imageUrl.'.jpg') : (pathinfo('img/products/'.$product->imageUrl.'.jpg', PATHINFO_EXTENSION) == 'jpeg' ? asset('img/products/'.$product->imageUrl.'.jpeg') : asset('img/products/'.$product->imageUrl.'.png')) }}" alt="{{ $product->name }}">
+            <img width="100%" src="{{ productImage($product->image) }}" alt="{{ $product->name }}">
             <div class="w3-container w3-center">
               <b>
                 <p class="w3-left-align">{{ $product->name }}</p>
