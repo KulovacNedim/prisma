@@ -3,7 +3,7 @@
   <div class="w3-bar w3-white w3-card" id="myNavbar">
     <a href="{{ route('welcome') }}" class="w3-bar-item w3-button w3-wide">ELEKTROPRIZMA</a>
     <!-- Right-sided navbar links -->
-    <div class="w3-right w3-hide-small">
+    <div class="w3-left w3-hide-small">
       <!-- <div class="w3-dropdown-hover">
         <button class="w3-button w3-white"><i class="fas fa-lightbulb"></i> RASVJETA</button>
         <div class="w3-dropdown-content w3-bar-block w3-card-4">
@@ -25,6 +25,18 @@
         @endif
       </a>
       @endforeach
+
+    </div>
+    <div class="w3-right w3-hide-small">
+      @guest
+      <!-- <a href="{{ route('register') }}" class="w3-bar-item w3-button"><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;"></i> REGISTRACIJA</a> -->
+      <a href="{{ route('login') }}" class="w3-bar-item w3-button"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i> LOGIN</a>
+      @else
+      <a href="{{ route('logout') }}" class="w3-bar-item w3-button" onclick="event.preventDefault();document.getElementById('logout-form').submit()"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> LOGOUT</a>
+      @endguest
+      <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+      </form>
 
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
