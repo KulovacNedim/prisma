@@ -1,4 +1,4 @@
-<!-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -60,9 +60,18 @@
                         </a></span>
                     @endif
                 </div>
+                @if(Cart::count() > 0)
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <span class="w3-left w3-padding s6"><a class="btn btn-link" href="{{ route('guest-checkout.index') }}">
+                            Posalji upit bez prijave/registracije
+                        </a></span>
+                </div>
+                @endif
+
+
 
             </div>
         </div>
     </div>
 </div>
-@endsection -->
+@endsection
