@@ -83,6 +83,10 @@
             <span class="w3-large">Total: {{ Cart::subtotal() }} KM</span><br>
             <span class="w3-small">Dostava 7 KM</span>
           </div>
+          <div class="w3-bar-item w3-center" style="width: 100%;">
+            <a href="{{ route('checkout.index') }}"><button class="w3-button w3-small w3-blue w3-hover-orange" style="padding: 10px;">Pošalji upit</button></a>
+          </div>
+
           <!-- <div class="w3-bar-item">
             <span class="w3-large">Sa dostavom: {{ $priceWithDelivary }} KM</span>
           </div> -->
