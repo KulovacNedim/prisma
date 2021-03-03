@@ -58,7 +58,7 @@
             </form>
           </span>
           <a href="{{ route('shop.show', [$item->model->id, $item->model->slug]) }}">
-            <img class="w3-bar-item w3-hide-small w3-left" style="width:85px" src="{{ pathinfo('img/products/'.$item->model->imageUrl.'.jpg', PATHINFO_EXTENSION) == 'jpg' ? asset('img/products/'.$item->model->imageUrl.'.jpg') : (pathinfo('img/products/'.$item->model->imageUrl.'.jpg', PATHINFO_EXTENSION) == 'jpeg' ? asset('img/products/'.$item->model->imageUrl.'.jpeg') : asset('img/products/'.$item->model->imageUrl.'.png')) }}" alt="{{ $item->model->name }}">
+            <img class="w3-bar-item w3-hide-small w3-left" style="width:85px" src="{{ productImage($item->model->image) }}" alt="{{ $item->model->name }}">
             <div class="w3-bar-item w3-left">
               <span class="w3-large">{{ $item->model->name }}</span><br>
               <span class="w3-hide-small">{{ $item->model->shortDescription }}</span>
@@ -83,6 +83,10 @@
             <span class="w3-large">Total: {{ Cart::subtotal() }} KM</span><br>
             <span class="w3-small">Dostava 7 KM</span>
           </div>
+          <div class="w3-bar-item w3-center" style="width: 100%;">
+            <a href="{{ route('checkout.index') }}"><button class="w3-button w3-small w3-blue w3-hover-orange" style="padding: 10px;">Pošalji upit</button></a>
+          </div>
+
           <!-- <div class="w3-bar-item">
             <span class="w3-large">Sa dostavom: {{ $priceWithDelivary }} KM</span>
           </div> -->
@@ -108,7 +112,7 @@
         <div class="w3-col w3-container m4 l3 w3-padding-16 ">
           <div class="w3-card-4 m5 l5">
 
-            <img style="width: 100%;" src="{{ pathinfo('img/products/'.$product->imageUrl.'.jpg', PATHINFO_EXTENSION) == 'jpg' ? asset('img/products/'.$product->imageUrl.'.jpg') : (pathinfo('img/products/'.$product->imageUrl.'.jpg', PATHINFO_EXTENSION) == 'jpeg' ? asset('img/products/'.$product->imageUrl.'.jpeg') : asset('img/products/'.$product->imageUrl.'.png')) }}" alt="{{ $product->name }}">
+            <img style="width: 100%;" src="{{ productImage($product->image) }}" alt="{{ $product->name }}">
             <div class="w3-container w3-center">
               <b>
                 <p class="w3-left-align">{{ $product->name }}</p>

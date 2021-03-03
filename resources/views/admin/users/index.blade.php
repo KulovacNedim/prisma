@@ -1,4 +1,4 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
 
 @section('content')
 <div class="w3-container">
@@ -32,4 +32,4 @@
     @endforeach
   </table>
 </div>
-@endsection
+@endsection -->
