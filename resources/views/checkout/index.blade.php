@@ -51,19 +51,27 @@
       <form class="w3-container w3-card" style="height: 370px;" action="{{ route('checkout.store') }}" method="POST">
         @csrf
         <p>
-          <input class="w3-input" type="text" placeholder="Ime i prezime" name="name" required>
+          @if(auth()->user())
+          <input class="w3-input" type="text" placeholder="Ime i prezime" name="name" value="{{ auth()->user()->name  }}" required readonly>
+          @else
+          <input class="w3-input" type="text" placeholder="Ime i prezime" name="name" value="{{ old('name')  }}" required>
+          @endif
         </p>
         <p>
-          <input class="w3-input" type="email" placeholder="e-mail adresa" name="email" required>
+          @if(auth()->user())
+          <input class="w3-input" type="email" placeholder="e-mail adresa" name="email" value="{{ auth()->user()->email }}" required readonly>
+          @else
+          <input class="w3-input" type="email" placeholder="e-mail adresa" name="email" value="{{ old('email') }}" required>
+          @endif
         </p>
         <p>
-          <input class="w3-input" type="text" placeholder="Kućna adresa" name="address" required>
+          <input class="w3-input" type="text" placeholder="Kućna adresa" name="address" value="{{ old('address') }}" required>
         </p>
         <p>
-          <input class="w3-input" type="text" placeholder="Poštanski broj" name="postalCode" required>
+          <input class="w3-input" type="text" placeholder="Poštanski broj" name="postalCode" value="{{ old('postalCode') }}" required>
         </p>
         <p>
-          <input class="w3-input" type="text" placeholder="Grad" name="city" required>
+          <input class="w3-input" type="text" placeholder="Grad" name="city" value="{{ old('city') }}" required>
         </p>
         <button class="w3-button w3-blue w3-hover-orange" style="width: 100%; margin-top:25px; margin-bottom:25px" type="submit">Pošalji upit</button>
       </form>

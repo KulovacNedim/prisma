@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -37,6 +38,14 @@ class CheckoutController extends Controller
         // save to db
         // send email
         // set notification
+        $user = User::where('email', $request['email'])->first();
+        if ($user) {
+            error_log($user->email);
+            // notify user that this email already exist and if user is owner of it he/she can log in and have saved history
+        } else {
+            error_log("User not found");
+            return redirect()->route('confirmation.index');
+        }
         return redirect()->route('confirmation.index');
     }
 

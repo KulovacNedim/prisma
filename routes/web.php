@@ -42,6 +42,8 @@ Route::patch('/cart/{product}', [App\Http\Controllers\CartController::class, 'up
 Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
 Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 
+Route::get('/guest-checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('guest-checkout.index');
+
 Route::get('/thankyou', [App\Http\Controllers\ConfirmationController::class, 'index'])->name('confirmation.index');
 
 // Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
