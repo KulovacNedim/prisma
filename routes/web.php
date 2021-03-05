@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Facades\Voyager;
@@ -21,11 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/products', [ProductController::class, 'index'])->middleware('auth');
-Route::get('/products/create',  [ProductController::class, 'create']);
-Route::post('/products',  [ProductController::class, 'store']);
-Route::get('/products/{id}',  [ProductController::class, 'show']);
-Route::delete('/products/{id}',  [ProductController::class, 'destroy']);
+// Route::get('/products', [ProductController::class, 'index'])->middleware('auth');
+// Route::get('/products/create',  [ProductController::class, 'create']);
+// Route::post('/products',  [ProductController::class, 'store']);
+// Route::get('/products/{id}',  [ProductController::class, 'show']);
+// Route::delete('/products/{id}',  [ProductController::class, 'destroy']);
 
 Auth::routes();
 
@@ -46,6 +45,7 @@ Route::get('/guest-checkout', [App\Http\Controllers\CheckoutController::class, '
 
 Route::get('/thankyou', [App\Http\Controllers\ConfirmationController::class, 'index'])->name('confirmation.index');
 
+
 // Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
 //     Route::resource('/users', 'UserController', ['except' => ['show', 'create', 'store']]);
 // });
@@ -54,6 +54,7 @@ Route::get('/thankyou', [App\Http\Controllers\ConfirmationController::class, 'in
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+Route::post('/voyager/products/remove', [App\Http\Controllers\Voyager\ProductsController::class, 'remove_media'])->name('voyager.products.media.remove');
 
 Auth::routes();
 
