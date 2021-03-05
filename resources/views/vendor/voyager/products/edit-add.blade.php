@@ -200,6 +200,25 @@ $add = is_null($dataTypeContent->getKey());
     $('.form-group').on('click', '.remove-single-file', deleteHandler('a', false));
 
     // removing image
+    $('#confirm_delete').on('click', function() {
+      $.post('{{ route('voyager.'.$dataType->slug.'.media.remove') }}', params,
+        function(response) {
+          if (response &&
+            response.data &&
+            response.data.status &&
+            response.data.status == 200) {
+
+            toastr.success(response.data.message);
+            $file.parent().fadeOut(300, function() {
+              $(this).remove();
+            })
+          } else {
+            toastr.error("Error removing file.");
+          }
+        });
+
+      $('#confirm_delete_modal').modal('hide');
+    });
 
     $('[data-toggle="tooltip"]').tooltip();
   });
