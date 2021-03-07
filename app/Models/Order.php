@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id', 'billing_email', 'billing_name', 'billing_address', 'billing_postalCode', 'billing_city', 'billing_total'];
+    protected $fillable = ['user_id', 'billing_email', 'billing_name', 'billing_address', 'billing_postalCode', 'billing_city', 'billing_total', 'random_identifier', 'billing_phone', 'is_active'];
 
     use HasFactory;
 
@@ -18,6 +18,6 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\Products')->withPivot('quantity');
+        return $this->belongsToMany('App\Models\Product')->withPivot('quantity');
     }
 }

@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('billing_city');
             $table->string('billing_total');
             $table->string('availability_date')->nullable();
-            $table->string('random_identifier')->unique();
+            $table->string('random_identifier');
             $table->boolean('is_active')->default(1)->change();
             $table->timestamps();
         });
