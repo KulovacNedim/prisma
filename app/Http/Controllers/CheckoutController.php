@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -36,6 +39,30 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         // save to db
+        $order = Order::create([
+            'user_id' => auth()->user() ? auth()->user()->id : null,
+            'billing_email' => $request->email,
+            'billing_phone' => $request->phone,
+            'billing_name' => $request->name,
+            'billing_address' => $request->address,
+            'billing_postalCode' => $request->postalCode,
+            'billing_city' => $request->city,
+            'billing_total' => Cart::subtotal(),
+            'availability_date' => null,
+            'random_identifier' => '123123123',
+            'is_active' => 1,
+        ]);
+
+        foreach (Cart::content() as $item) {
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'product_id' => $item->model->id,
+                'quantity' => $item->qty,
+                'price' => $item->price,
+                'is_available' => 1
+            ]);
+        }
+
         // send email
         // set notification
         $user = User::where('email', $request['email'])->first();
