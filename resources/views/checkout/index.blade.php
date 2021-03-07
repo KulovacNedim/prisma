@@ -18,7 +18,7 @@
       <div class="w3-container w3-blue">
         <h4>Lista za upit:</h4>
       </div>
-      <div class="w3-container w3-card" style="height: 370px;">
+      <div class="w3-container w3-card" style="height: 420px;">
         <div class="">
           <div class="w3-border-bottom ">
             <h4>Upit</h4>
@@ -48,7 +48,7 @@
         <h4>Kontakt podaci</h4>
       </div>
 
-      <form class="w3-container w3-card" style="height: 370px;" action="{{ route('checkout.store') }}" method="POST">
+      <form class="w3-container w3-card" style="height: 420px;" action="{{ route('checkout.store') }}" method="POST">
         @csrf
         <p>
           @if(auth()->user())
@@ -63,6 +63,9 @@
           @else
           <input class="w3-input" type="email" placeholder="e-mail adresa" name="email" value="{{ old('email') }}" required>
           @endif
+        </p>
+        <p>
+          <input class="w3-input" type="text" placeholder="Telefon" name="phone" value="{{ old('phone') }}" required>
         </p>
         <p>
           <input class="w3-input" type="text" placeholder="Kućna adresa" name="address" value="{{ old('address') }}" required>
