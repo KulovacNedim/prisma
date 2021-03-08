@@ -17,9 +17,9 @@ class CreateOrderProductTable extends Migration
             $table->id();
             $table->bigInteger('order_id')->unsigned()->nullable();
             $table->bigInteger('product_id')->unsigned()->nullable();
-            $table->integer('price')->unsigned();
-            $table->integer('quantity')->unsigned();
-            $table->boolean('is_available')->default(1)->change();
+            $table->float('price')->unsigned();
+            $table->float('quantity')->unsigned();
+            $table->boolean('is_available')->default(1);
             $table->timestamps();
         });
     }
