@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderPlaced;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -64,15 +66,8 @@ class CheckoutController extends Controller
         }
 
         // send email
-        // set notification
-        $user = User::where('email', $request['email'])->first();
-        if ($user) {
-            error_log($user->email);
-            // notify user that this email already exist and if user is owner of it he/she can log in and have saved history
-        } else {
-            error_log("User not found");
-            return redirect()->route('confirmation.index');
-        }
+        Mail::send(new OrderPlaced($order));
+
         return redirect()->route('confirmation.index');
     }
 

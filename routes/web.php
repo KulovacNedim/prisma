@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\OrderPlaced;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
