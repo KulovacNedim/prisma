@@ -21,10 +21,10 @@ class CreateOrdersTable extends Migration
             $table->string('billing_address');
             $table->string('billing_postalCode');
             $table->string('billing_city');
-            $table->string('billing_total');
+            $table->float('billing_total');
             $table->string('availability_date')->nullable();
             $table->string('random_identifier');
-            $table->boolean('is_active')->default(1)->change();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }
