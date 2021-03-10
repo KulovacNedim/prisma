@@ -1,17 +1,14 @@
-<!-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="w3-row w3-margin">
+<div class="w3-row">
+    <div class="w3-col w3-container m1 l1">
     </div>
-    <div class="w3-row">
-        <div>
-            <div class="w3-modal-content w3-card-4" style="max-width:600px">
 
-                <div class="w3-center"><br>
-                    <img src="https://www.w3schools.com/w3css/img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
-                </div>
-                <div class="w3-center"><br>
+    <div class="w3-col w3-container m10 l10 w3-padding ">
+        <div class="w3-row w3-card w3-margin-top">
+            <div class="w3-col w3-container l7 w3-margin-top w3-padding ">
+                <div class="w3-margin"><br>
                     <h3>RESET PASSWORDA</h3>
                 </div>
 
@@ -32,17 +29,25 @@
                         </span>
                         @enderror
 
-                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Pošalji novi password</button>
+                        <button class="w3-button w3-block w3-blue w3-small w3-hover-orange w3-hover-text-white w3-section w3-padding" type="submit">Pošalji novi password</button>
                     </div>
                 </form>
-
-                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey w3-hide-small">
-                    <span class="w3-left w3-padding s6"><a class="btn btn-link" href="{{ route('login') }}">
-                            {{ __('Forma za login') }}
-                        </a></span>
+            </div>
+            <div class="w3-col w3-container l5 w3-margin-top w3-margin-bottom w3-padding w3-border-left" style="min-height: 260px;">
+                <div class="w3-container w3-margin">
+                    <div class="w3-margin-top"><br>
+                        <b>
+                            <p>Već znate svoj password?</p>
+                        </b>
+                        <a class="btn btn-link" href="{{ route('register') }}">
+                            <a class="btn btn-link" href="{{ route('login') }}"><button class="w3-button w3-blue w3-hover-orange" type="submit">Prijavite se</button></a>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="w3-col w3-container m1 l1">
+    </div>
 </div>
-@endsection -->
+@endsection
