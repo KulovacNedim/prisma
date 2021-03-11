@@ -55,6 +55,10 @@
             bottom: 0;
             height: inherit;
         }
+
+        .coverSlides {
+            display: none;
+        }
     </style>
     <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css"> -->
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">

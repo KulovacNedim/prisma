@@ -1,7 +1,10 @@
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
-  <div class="w3-bar w3-white w3-card" id="myNavbar">
-    <a href="{{ route('welcome') }}" class="w3-bar-item w3-button w3-wide">ELEKTROPRIZMA</a>
+  <div class="w3-bar w3-white w3-card" id="myNavbar" style="height: 65px;">
+    <a href="{{ route('welcome') }}" class="w3-bar-item w3-button w3-wide w3-hover-white" style="display: flex; justify-content: center; align-items:center; height: 65px;">
+      <img src="{{ asset('img/ep.png') }}" alt="logo" style="height: 40px; margin-right:8px" class="w3-hide-small">
+      <b><span class="w3-text-red w3-xlarge w3-hide-medium">ELEKTRO</span><span class="w3-text-blue w3-xlarge w3-hide-medium">PRIZMA</span></b>
+    </a>
     <!-- Right-sided navbar links -->
     <div class="w3-left w3-hide-small">
       <!-- <div class="w3-dropdown-hover">
@@ -18,11 +21,12 @@
       <a href="#contact" class="w3-bar-item w3-button"><i class="fas fa-building"></i> O NAMA</a> -->
 
       @foreach($items as $menu_item)
-      <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button"><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;">
-        </i>{{ $menu_item->title }}
-        @if($menu_item->title === 'LISTA' && Cart::count() > 0)
-        <span class="w3-badge w3-small w3-yellow" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
-        @endif
+      <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="display: flex; justify-content: center; align-items:center; height: 65px;"><b><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;">
+          </i>{{ $menu_item->title }}
+          @if($menu_item->title === 'LISTA' && Cart::count() > 0)
+          <span class="w3-badge w3-small w3-yellow" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
+          @endif
+        </b>
       </a>
       @endforeach
 
@@ -30,9 +34,9 @@
     <div class="w3-right w3-hide-small">
       @guest
       <!-- <a href="{{ route('register') }}" class="w3-bar-item w3-button"><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;"></i> REGISTRACIJA</a> -->
-      <a href="{{ route('login') }}" class="w3-bar-item w3-button"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i> LOGIN</a>
+      <b><a href="{{ route('login') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="display: flex; justify-content: center; align-items:center; height: 65px;"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i> LOGIN</a></b>
       @else
-      <a href="{{ route('logout') }}" class="w3-bar-item w3-button" onclick="event.preventDefault();document.getElementById('logout-form').submit()"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> LOGOUT</a>
+      <b><a href="{{ route('logout') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" onclick="event.preventDefault();document.getElementById('logout-form').submit()" style="display: flex; justify-content: center; align-items:center; height: 65px;"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> LOGOUT</a></b>
       @endguest
       <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
         {{ csrf_field() }}
@@ -41,34 +45,40 @@
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open_main_nav()">
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-text-gray w3-hide-medium w3-hover-red" style="display: flex; justify-content: center; align-items:center;width:60px; height: 65px;" onclick="w3_open_main_nav()">
       <i class="fa fa-bars"></i>
     </a>
   </div>
 
-  <!-- <ul>
-    @foreach($items as $menu_item)
-    <li><a href="{{ $menu_item->link() }}">{{ $menu_item->title }}</a></li>
-    @endforeach
-  </ul> -->
-
-  <nav class="w3-bar-block w3-collapse w3-theme-d3 w3-animate-left w3-hide-medium w3-hide-large" id="main_nav" style="display:none;z-index:99; width: 100%; max-width:250px; height: 100vh; position: absolute; top:0">
-    <div class="w3-container w3-bottombar w3-border-yellow w3-white">
-      <b>
-        <p class="w3-left w3-text-yellow">ELEKTROPRIZMA</p>
-      </b>
-      <a href="javascript:void(0)" onclick="w3_close_main_nav()" class="w3-right w3-padding-large w3-hide-large" title="Close Menu">
-        <i class="fa fa-remove"></i>
-      </a>
+  <nav class="w3-bar-block w3-collapse w3-animate-left w3-hide-medium w3-hide-large w3-light-gray" id="main_nav" style="display:none; z-index:99; width: 100%; max-width:250px; height: 100vh; position: absolute; top:0">
+    <div class="w3-row w3-light-gray" style="height: 65px;">
+      <div class="w3-rest w3-container" style="height: 100%; display: flex; align-items: center">
+        <b>
+          <p class="w3-text-black w3-large">MENU</p>
+        </b>
+      </div>
+    </div>
+    <div>
+      @guest
+      <!-- <a href="{{ route('register') }}" class="w3-bar-item w3-button"><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;"></i> REGISTRACIJA</a> -->
+      <b><a href="{{ route('login') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="height: 40px; display: flex;  align-items:center; border-bottom: 1px solid #999; margin-bottom: 10px;"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i> LOGIN</a></b>
+      @else
+      <b><a href="{{ route('logout') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" onclick="event.preventDefault();document.getElementById('logout-form').submit()" style="height: 40px; display: flex;  align-items:center; border-bottom: 1px solid #999; margin-bottom: 10px;"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> LOGOUT</a></b>
+      @endguest
+      <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+      </form>
     </div>
     @foreach($items as $menu_item)
-    <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button"><i class="{{ $menu_item->icon_class }}" style="margin-right: 10px;">
-      </i>{{ $menu_item->title }}
-      @if($menu_item->title === 'LISTA' && Cart::count() > 0)
-      <span class="w3-badge w3-small w3-yellow" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
-      @endif
+    <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red"><b><i class="{{ $menu_item->icon_class }}" style="margin-right: 10px;">
+        </i>{{ $menu_item->title }}
+        @if($menu_item->title === 'LISTA' && Cart::count() > 0)
+        <span class="w3-badge w3-small w3-yellow" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
+        @endif
+      </b>
     </a>
     @endforeach
+
   </nav>
 
   <!-- Overlay effect when opening sidebar on small screens -->
