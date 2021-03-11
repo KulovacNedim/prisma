@@ -91,7 +91,7 @@
                 <div class="w3-container w3-large w3-red " style="height: 50px; display:flex; align-items: center">
                     AKCIJSKI ARTIKLI
                 </div>
-                <div class="" style="display: flex; flex-wrap: wrap;justify-content:space-around    ">
+                <div style="display: flex; flex-wrap: wrap;justify-content:space-around">
                     @forelse($saleProducts as $product)
                     <a href="{{ route('shop.show', [$product->id, $product->slug]) }}" class="w3-padding-16">
                         <div style="max-width: 200px;">

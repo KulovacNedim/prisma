@@ -5,99 +5,83 @@
 @endsection
 
 @section('content')
-<div class="w3-row">
-  <div class="w3-col w3-container m1 l1 ">
+<div class="w3-row w3-margin-bottom ">
+  <div class="w3-col w3-container l1">
   </div>
-  <div class="w3-col w3-container m10 l10  w3-card">
-    <div class="w3-col w3-container m5 l5">
-      @if ($product->images)
-      <div class="" style="width:100%; max-height:800px; overflow: hidden;">
-        <div class="w3-content" style="width: 100%">
-          @foreach(json_decode($product->images, true) as $image)
-          @if($loop->index == 0)
-          <img class="productSlides w3-animate-bottom" src="{{ productImage($image) }}" style="width:100%;">
-          @else
-          <img class="productSlides w3-animate-bottom" src="{{ productImage($image) }}" style="width:100%;display:none">
-          @endif
-          @endforeach
-          <div class="w3-row-padding w3-section">
-            @foreach(json_decode($product->images, true) as $image)
-            @if($loop->index == 0)
-            <div class="w3-col s4">
-              <img class="thumb w3-border-blue w3-bottombar" src="{{ productImage($image) }}" style="padding: 3px 0; width:100%;cursor:pointer; object-fit: scale-down; object-position: center; max-height: 100px; width: 100%;" onclick="currentSlide({{ $loop->index + 1 }})">
-            </div>
+  <div class="w3-col w3-container l10">
+    <div class="w3-display-container">
+      <span class="w3-hide-small">
+        @include('partials.product-show-image')
+      </span>
+
+      <div class="w3-col w3-container m7 l7 w3-text-dark-gray" style="position: relative;">
+        <div class="w3-container w3-large w3-bottombar w3-border-blue" style="height: 50px; display:flex; align-items: center">
+          <h1 class="w3-xlarge w3-text-dark-gray"><b>{{ strtoupper($product->name) }}</b></h1>
+        </div>
+        <div style="display: flex;">
+          <span class="w3-text-dark-gray w3-container" style="float: left; margin-top: 5px">{{ $product->shortDescription}}</span>
+        </div>
+        <div class="w3-hide-large w3-hide-medium w3-margin-top">
+          @include('partials.product-show-image')
+        </div>
+        <div class="w3-container" style="display:flex; align-items: start; justify-content: start; margin-top: 35px;">
+          <b>
+            <p class="w3-large">BRAND: LKSAJDLASK</p>
+          </b>
+        </div>
+        <div class="w3-container" style="display:flex; align-items: start; justify-content: start;">
+          <div style="margin-top: 5px;">
+            @if($product->is_discount)
+            <h1 style="margin-top: 10px; font-weight:bold; "><s style="margin-right:20px">{{ $product->presentPrice() }}</s> <span class="w3-text-red ">{{ $product->presentNewPrice() }}</span></h1>
             @else
-            <div class="w3-col s4">
-              <img class="thumb w3-border-light-grey w3-bottombar" src="{{ productImage($image) }}" style="padding: 3px 0; width:100%; cursor:pointer; object-fit: scale-down; object-position: center; max-height: 100px; width: 100%;" onclick="currentSlide({{ $loop->index + 1 }})">
-            </div>
+            <h1 style="margin-top: 0; font-weight:bold">{{ $product->presentPrice() }}</h1>
             @endif
-            @endforeach
           </div>
         </div>
-      </div>
-      @else
-      <img style="object-fit: scale-down; object-position: center; max-height: 500px; width: 100%;" src="{{ productImage($product->image) }}" alt="{{ $product->name }}" style="width:100%">
-      @endif
-    </div>
+        <div class="w3-container">
+          <p style="margin-top: 25px;">{!! $product->description !!}</p>
+        </div>
+        <div class="w3-container w3-center">
+          <form action="{{ route('cart.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="id" value="{{ $product->id }}" />
+            <input type="hidden" name="name" value="{{ $product->name }}" />
+            <input type="hidden" name="price" value="{{ $product->price }}" />
+            <button class="w3-button w3-blue w3-hover-orange" style=" margin-top:25px" type="submit">Dodaj na listu za upit</button>
+          </form>
+        </div>
 
-    <div class="w3-col w3-container m5 l5" style="position: relative;">
-      @if($product->is_discount)
-      <div style="position: absolute;top:30px; right: 0px;">
-        <span class="w3-wide w3-tag w3-padding w3-round-large w3-large w3-orange w3-text-white w3-center w3-animate-left">AKCIJA!!!</span>
-      </div>
-      @endif
-      <h1 style="font-weight: bold;">{{ $product->name }}</h1>
-      <div style="margin-top: 35px;">
-        <span class="w3-text-gray;">{{ $product->shortDescription}}</span>
         @if($product->is_discount)
-        <h1 style="margin-top: 10px; font-weight:bold; "><s style="margin-right:20px">{{ $product->presentPrice() }}</s> {{ $product->presentNewPrice() }}</h1>
-        @else
-        <h1 style="margin-top: 0; font-weight:bold">{{ $product->presentPrice() }}</h1>
+        <div style="position: absolute;top:80px; right: 12px;">
+          <span class="w3-wide w3-tag w3-padding w3-round-large w3-large w3-orange w3-text-white w3-center w3-animate-left">AKCIJA!!!</span>
+        </div>
         @endif
-      </div>
 
-      <p style="margin-top: 25px;">{!! $product->description !!}</p>
-      <form action="{{ route('cart.store') }}" method="POST">
-        @csrf
-        <input type="hidden" name="id" value="{{ $product->id }}" />
-        <input type="hidden" name="name" value="{{ $product->name }}" />
-        <input type="hidden" name="price" value="{{ $product->price }}" />
-        <button class="w3-button w3-blue w3-hover-orange" style="width: 100%; margin-top:25px" type="submit">Dodaj na listu za upit</button>
-      </form>
+      </div>
     </div>
   </div>
-  <div class="w3-col w3-container m1 l1">
+  <div class="w3-col w3-container l1">
   </div>
 </div>
 
-<div class="w3-row" style="margin-top: 30px;">
-  <div class="w3-col w3-container m1 l1 ">
+<div class="w3-row w3-margin-bottom w3-light-gray" style="margin-top: 30px;">
+  <div class="w3-col w3-container l1">
   </div>
-  <div class="w3-col w3-container w3- center m10 l10 w3-card">
-    <p>Možda Vas zanimaju i ovi proizvodi: </p>
-    <div class="w3-container">
+  <div class="w3-col w3-container l10">
+    <div class="w3-container w3-large w3-bottombar w3-border-blue" style="min-height: 50px; display:flex; align-items: center; margin-top:15px;">
+      <h1 class="w3-large w3-text-dark-gray"><b>Možda Vas zanimaju i sljedeći artikli</b></h1>
+    </div>
+    <div class="" style="display: flex; flex-wrap: wrap;justify-content:space-around">
       @foreach($mightAlsoLike as $product)
       <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
-        <div class="w3-col w3-container m4 l3 w3-padding-16 ">
-          <div class="w3-card-4 m5 l5">
-
-            <img style="width: 100%;" src="{{ productImage($product->image) }}" alt="{{ $product->name }}">
-            <div class="w3-container w3-center">
-              <b>
-                <p class="w3-left-align">{{ $product->name }}</p>
-              </b>
-              <div class="w3-section w3-left-align">
-                <span>{{ $product->presentPrice() }}</span>
-              </div>
-
-            </div>
-          </div>
+        <div style="max-width: 200px; margin-top: 16px">
+          @include('partials.product-card')
         </div>
       </a>
       @endforeach
     </div>
   </div>
-  <div class="w3-col w3-container m1 l1">
+  <div class="w3-col w3-container l1">
   </div>
 </div>
 
