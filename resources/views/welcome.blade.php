@@ -29,62 +29,74 @@
     <div class="w3-col w3-container l1 ">
     </div>
     <div class="w3-col w3-container l10 w3-center">
-        <div class="w3-row">
-            <div class="w3-col s3 w3-center" style="padding-right: 10px;">
-                <div class="w3-container w3-large w3-red" style="height: 50px; display:flex; align-items: center">
-                    KATEGORIJE
-                </div>
-                <ul class="w3-ul w3-hoverable w3-large">
+        <div class="w3-row w3-hide-large w3-margin-bottom" style=" height: 50px; ">
+            <div class="w3-col w3-center">
+                <button onclick="openCategoriesMenu('cat_acc')" class="w3-button w3-block w3-red w3-left-align w3-hover-red" style="height: 50px; width: 100%; ">KATEGORIJE <i id="cat_caret" class="fa fa-caret-down" style="margin-left: 8px;"></i></button>
+                <div id="cat_acc" class="w3-hide">
                     @foreach($categories as $category)
-                    <a href="{{ route('shop.index', ['id' => $category->id, 'category' => $category->slug]) }}">
-                        <li style="text-align: left" class="w3-hover-red w3-border-bottom">{{$category->name}}</li>
+                    <a class="w3-button w3-block w3-left-align w3-hover-red w3-border-bottom" style="width: 100%;" href="{{ route('shop.index', ['id' => $category->id, 'category' => $category->slug]) }}">
+                        {{$category->name}}
                     </a>
                     @endforeach
-                </ul>
+                </div>
             </div>
-            <div class="w3-col s9  w3-center">
-                <div class="">
-                    <div class="w3-container w3-large w3-blue" style="height: 50px; display:flex; align-items: center">
-                        TOP ARTIKLI
-                    </div>
-                    <div class="w3-row-padding">
-                        @forelse($topProducts as $product)
-                        <a href="{{ route('shop.show', [$product->id, $product->slug]) }}" class="w3-col m6 l4 w3-padding-16">
-                            <div>
-                                <div class="w3-border w3-round m5 l5" style="overflow: hidden;">
+        </div>
+        <div class="w3-col l3 w3-center w3-hide-small w3-hide-medium" style="padding-right: 10px;">
 
-                                    <img width="100%" src="{{ productImage($product->image) }}" alt="{{ $product->name }}">
-                                    <div class="w3-container w3-center">
-                                        <b>
-                                            <p class="w3-left-align">{{ $product->name }}</p>
-                                        </b>
-                                        <div class="w3-section w3-left-align">
-                                            <span>{{ $product->presentPrice() }}</span>
-                                            <span style="float: right;">
-                                                <form action="{{ route('cart.store') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="id" value="{{ $product->id }}" />
-                                                    <input type="hidden" name="name" value="{{ $product->name }}" />
-                                                    <input type="hidden" name="price" value="{{ $product->price }}" />
-                                                    <button class="w3-button w3-blue w3-hover-amber w3-tiny" type="submit">Dodaj na listu za upit</button>
-                                                </form>
-                                            </span>
-                                        </div>
+            <div class="w3-container w3-large w3-red" style="height: 50px; display:flex; align-items: center">
+                KATEGORIJE
+            </div>
+            <ul class="w3-ul w3-hoverable w3-large">
+                @foreach($categories as $category)
+                <a href="{{ route('shop.index', ['id' => $category->id, 'category' => $category->slug]) }}">
+                    <li style="text-align: left" class="w3-hover-red w3-border-bottom">{{$category->name}}</li>
+                </a>
+                @endforeach
+            </ul>
+        </div>
+        <div class="w3-col l9 w3-center">
+            <div class="">
+                <div class="w3-container w3-large w3-blue" style="height: 50px; display:flex; align-items: center">
+                    TOP ARTIKLI
+                </div>
+                <div class="w3-row-padding">
+                    @forelse($topProducts as $product)
+                    <a href="{{ route('shop.show', [$product->id, $product->slug]) }}" class="w3-col m6 l4 w3-padding-16">
+                        <div>
+                            <div class="w3-border w3-round m5 l5" style="overflow: hidden;">
 
+                                <img width="100%" src="{{ productImage($product->image) }}" alt="{{ $product->name }}">
+                                <div class="w3-container w3-center">
+                                    <b>
+                                        <p class="w3-left-align">{{ $product->name }}</p>
+                                    </b>
+                                    <div class="w3-section w3-left-align">
+                                        <span>{{ $product->presentPrice() }}</span>
+                                        <span style="float: right;">
+                                            <form action="{{ route('cart.store') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $product->id }}" />
+                                                <input type="hidden" name="name" value="{{ $product->name }}" />
+                                                <input type="hidden" name="price" value="{{ $product->price }}" />
+                                                <button class="w3-button w3-blue w3-hover-amber w3-tiny" type="submit">Dodaj na listu za upit</button>
+                                            </form>
+                                        </span>
                                     </div>
+
                                 </div>
                             </div>
-                        </a>
-                        @empty
-                        <div>Kategorija trenutno ne sadrži artikle</div>
-                        @endforelse
-                    </div>
+                        </div>
+                    </a>
+                    @empty
+                    <div>Kategorija trenutno ne sadrži artikle</div>
+                    @endforelse
                 </div>
             </div>
         </div>
     </div>
-    <div class="w3-col w3-container l1 ">
-    </div>
+</div>
+<div class="w3-col w3-container l1 ">
+</div>
 </div>
 
 
@@ -107,6 +119,23 @@
         }
         x[slideIndex - 1].style.display = "block";
         setTimeout(carousel, 2700); // Change image every 2 seconds
+    }
+
+    // accordion - categories
+    function openCategoriesMenu(id) {
+        var x = document.getElementById(id);
+        var y = document.getElementById('cat_caret');
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+        // caret control
+        if (y.className.indexOf("fa-caret-up") == -1) {
+            y.className += " fa-caret-up";
+        } else {
+            y.className = y.className.replace(" fa-caret-up", "");
+        }
     }
 </script>
 
