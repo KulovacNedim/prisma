@@ -40,11 +40,20 @@
       @endif
     </div>
 
-    <div class="w3-col w3-container m5 l5 ">
+    <div class="w3-col w3-container m5 l5" style="position: relative;">
+      @if($product->is_discount)
+      <div style="position: absolute;top:30px; right: 0px;">
+        <span class="w3-wide w3-tag w3-padding w3-round-large w3-large w3-orange w3-text-white w3-center w3-animate-left">AKCIJA!!!</span>
+      </div>
+      @endif
       <h1 style="font-weight: bold;">{{ $product->name }}</h1>
       <div style="margin-top: 35px;">
         <span class="w3-text-gray;">{{ $product->shortDescription}}</span>
+        @if($product->is_discount)
+        <h1 style="margin-top: 10px; font-weight:bold; "><s style="margin-right:20px">{{ $product->presentPrice() }}</s> {{ $product->presentNewPrice() }}</h1>
+        @else
         <h1 style="margin-top: 0; font-weight:bold">{{ $product->presentPrice() }}</h1>
+        @endif
       </div>
 
       <p style="margin-top: 25px;">{!! $product->description !!}</p>

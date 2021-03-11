@@ -19,10 +19,12 @@ class Welcome extends Controller
         $slides = Slide::where('is_active', 1)->get();
         $topProducts = Product::where('is_top_product', 1)->get();
         $categories = Category::all();
+        $saleProducts = Product::where('is_discount', 1)->get();
         return view('welcome')->with([
             'slides' => $slides,
             'topProducts' => $topProducts,
-            'categories' => $categories
+            'categories' => $categories,
+            'saleProducts' => $saleProducts,
         ]);
     }
 

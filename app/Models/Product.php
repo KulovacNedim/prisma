@@ -14,6 +14,11 @@ class Product extends Model
         return $this->price . ' KM';
     }
 
+    public function presentNewPrice()
+    {
+        return $this->new_price . ' KM';
+    }
+
     public function scopeMightAlsoLike($query)
     {
         return $query->inRandomOrder()->take(4);
