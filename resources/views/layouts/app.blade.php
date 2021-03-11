@@ -30,7 +30,7 @@
         }
 
         .w3-button {
-            width: 150px;
+            /* width: 150px; */
         }
 
         .w3-bar .w3-button {
@@ -58,6 +58,38 @@
 
         .coverSlides {
             display: none;
+        }
+
+
+        s,
+        strike {
+            text-decoration: none;
+            position: relative;
+        }
+
+        s::before,
+        strike::before {
+            top: 50%;
+            /*tweak this to adjust the vertical position if it's off a bit due to your font family */
+            background: red;
+            /*this is the color of the line*/
+            opacity: 1;
+            content: '';
+            width: 110%;
+            position: absolute;
+            height: .1em;
+            border-radius: .1em;
+            left: -5%;
+            white-space: nowrap;
+            display: block;
+            transform: rotate(-15deg);
+        }
+
+        s.straight::before,
+        strike.straight::before {
+            transform: rotate(0deg);
+            left: -1%;
+            width: 102%;
         }
     </style>
     <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css"> -->

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 
@@ -15,8 +17,14 @@ class Welcome extends Controller
     public function index()
     {
         $slides = Slide::where('is_active', 1)->get();
+        $topProducts = Product::where('is_top_product', 1)->get();
+        $categories = Category::all();
+        $saleProducts = Product::where('is_discount', 1)->get();
         return view('welcome')->with([
             'slides' => $slides,
+            'topProducts' => $topProducts,
+            'categories' => $categories,
+            'saleProducts' => $saleProducts,
         ]);
     }
 
