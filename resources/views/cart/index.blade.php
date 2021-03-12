@@ -1,70 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="w3-row">
-  <div class="w3-col w3-container m1 l1 ">
+  <div class="w3-col w3-container">
+    @include('partials.alerts')
   </div>
-  <div class="w3-col w3-container m10 l10">
-    <div class="w3-row">
-      <div class="w3-row">
-        <div class="w3-col w3-container m10 l10">
-          <b>
-            <h4>Lista za upit
-              @if (Cart::count() == 1)
-              ({{ Cart::count() }} artikal na listi)
-              @elseif (Cart::count() > 0)
-              ({{ Cart::count() }} artikala na listi)
-              @endif
-            </h4>
-          </b>
-        </div>
-        <div class="w3-col w3-container m2 l2">
-          @if (Cart::count() > 0)
-          <a href="{{ route('shop.index') }}"><button class="w3-button w3-blue w3-hover-orange" style="width: 100%; margin:7px 0">Nastavite kupovati</button></a>
-          @endif
-        </div>
-      </div>
-      <div class="w3-row">
-        <div class="w3-col w3-container">
-          @include('partials.alerts')
-          <!-- @if(count($errors) > 0)
-          <div>
-            <ul>
-              @foreach($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-          @endif -->
-        </div>
-      </div>
-      <div class="w3-row">
-        <div class="w3-rest w3-container">
-          @if (Cart::count() == 0) <p style="display: inline-block; margin-right: 20px">Trenutno nema artikala na listi.</p><a href="{{ route('shop.index') }}" class="w3-button w3-blue w3-hover-orange">Nastavite kupovati</a>
-          @endif
-        </div>
-      </div>
+</div>
+
+<div class="w3-row w3-margin-bottom  w3-text-dark-gray" style="margin-top: 30px;">
+  <div class="w3-col w3-container l1">
+  </div>
+  <div class="w3-col w3-container l10">
+    <div class="w3-row w3-large w3-bottombar w3-border-blue">
+      <h1 class=" w3-large w3-col m9 l9" style="min-height: 40px; display: flex; align-items: center;">
+        <b>LISTA ZA UPIT (Broj artikala: {{ Cart::count() }})</b>
+      </h1>
+      <span class="w3-col m3 l3"><a href="{{ route('shop.index') }}"><button class="w3-button w3-amber w3-hover-blue w3-hide-medium" style="width: 100%; margin:7px 0">Nastavite kupovati</button></a></span>
+      <span class="w3-col m3 l3"><a href="{{ route('shop.index') }}"><button class="w3-button w3-amber w3-hover-blue w3-small w3-hide-small w3-hide-large" style="width: 100%; margin:7px 0">Nastavite kupovati</button></a></span>
     </div>
-    <div class="w3-row">
-      <ul class="w3-ul w3-card-4" style="margin-top: 15px;">
+    <div>
+      <ul class="w3-ul" style="margin-top: 8px;">
         @foreach(Cart::content() as $item)
         <li class="w3-bar">
           <span onclick="this.parentElement.style.display='none'" class="w3-right">
             <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
               @csrf
               {{ method_field('DELETE') }}
-              <button type="submit" class="w3-button w3-bar-item w3-small w3-blue">X</button>
+              <button type="submit" class="w3-button w3-bar-item w3-small w3-hide-small w3-blue w3-hover-red">X</button>
             </form>
           </span>
-          <a href="{{ route('shop.show', [$item->model->id, $item->model->slug]) }}">
-            <img class="w3-bar-item w3-hide-small w3-left" style="width:85px" src="{{ productImage($item->model->image) }}" alt="{{ $item->model->name }}">
-            <div class="w3-bar-item w3-left">
-              <span class="w3-large">{{ $item->model->name }}</span><br>
-              <span class="w3-hide-small">{{ $item->model->shortDescription }}</span>
-            </div>
-          </a>
-          <div class="w3-bar-item w3-right" style="min-width: 130px">
+         
+
+          <div class="w3-hide-small">
+            <a href="{{ route('shop.show', [$item->model->id, $item->model->slug]) }}">
+              <img class="w3-bar-item w3-hide-small w3-left" style="width:85px" src="{{ productImage($item->model->image) }}" alt="{{ $item->model->name }}">
+              <div class="w3-bar-item w3-left">
+                <span class="w3-large">{{ $item->model->name }}</span><br>
+                <span class="w3-hide-small">{{ $item->model->shortDescription }}</span>
+              </div>
+            </a>
+            <div class="w3-bar-item w3-right" style="min-width: 130px">
             <span class="w3-large w3-right">{{ $item->subtotal }} KM</span>
           </div>
           <div class="w3-bar-item w3-right">
@@ -72,63 +47,67 @@
               <input type="text" value="{{ $item-> qty }}" data-id="{{ $item->rowId }}" class="quantity" style="width: 80px; text-align: right">
             </span>
           </div>
+          </div>
+          <div class="w3-hide-medium w3-hide-large w3-row">
+            <div class="w3-col s5">{{ $item->model->name }}</div>
+            <div class="w3-col s3"><input type="text" value="{{ $item-> qty }}" data-id="{{ $item->rowId }}" class="quantity" style="width: 60px; text-align: right"></div>
+            <div class="w3-col s3">{{ $item->subtotal }} KM</div>
+            <div class="w3-col s1">
+              <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button type="submit" class="w3-button  w3-tiny w3-blue w3-hover-red" style="padding: 7px 15px;">X</button>
+              </form>
+            </div>
+          </div>
+
         </li>
         @endforeach
       </ul>
-
-      @if (Cart::count() > 0)
-      <ul class="w3-ul w3-card-4" style="margin-top: 15px;">
-        <li class="w3-bar">
-          <div class="w3-bar-item w3-center" style="width: 100%;">
-            <span class="w3-large">Total: {{ Cart::subtotal() }} KM</span><br>
-            <span class="w3-small">Dostava 7 KM</span>
-          </div>
-          <div class="w3-bar-item w3-center" style="width: 100%;">
-            <a href="{{ route('checkout.index') }}"><button class="w3-button w3-small w3-blue w3-hover-orange" style="padding: 10px;">Pošalji upit</button></a>
-          </div>
-
-          <!-- <div class="w3-bar-item">
-            <span class="w3-large">Sa dostavom: {{ $priceWithDelivary }} KM</span>
-          </div> -->
-        </li>
-      </ul>
+    </div>
+    @if (Cart::count() > 0)
+    <div class="w3-row w3-large w3-blue w3-margin-top w3-center">
+      <div class="w3-col m6 l6">
+        <p>Total: {{ Cart::subtotal() }} KM</p>
+      </div>
+      <div class="w3-col m6 l6" style="min-height: 60px; display: flex; align-items:center; justify-content: center;">
+        <a href="{{ route('checkout.index') }}"><button class="w3-button w3-amber w3-hide-medium w3-hover-blue">Pošalji upit</button></a>
+        <a href="{{ route('checkout.index') }}"><button class="w3-button w3-small w3-hide-small w3-hide-large w3-amber w3-hover-blue">Pošalji upit</button></a>
+      </div>
+    </div>
+    @endif
+    <div>
+      @if (Cart::count() == 0)
+      <div class="w3-panel w3-blue">
+        <p>Trenutno nema artikala na listi. <a href="{{ route('shop.index') }}" style="text-decoration: underline;">Započnite kupovinu!</a></p>
+      </div>
       @endif
     </div>
+
   </div>
-  <div class="w3-col w3-container m1 l1">
+  <div class="w3-col w3-container l1">
   </div>
 </div>
 
-
 @if (Cart::count() > 0)
-<div class="w3-row" style="margin-top: 50px;">
-  <div class="w3-col w3-container m1 l1 ">
+<div class="w3-row w3-margin-bottom w3-light-gray" style="margin-top: 30px;">
+  <div class="w3-col w3-container l1">
   </div>
-  <div class="w3-col w3-container w3- center m10 l10">
-    <p>Možda Vas zanimaju i ovi proizvodi: </p>
-    <div class="w3-container  w3-card">
+  <div class="w3-col w3-container l10">
+    <div class="w3-container w3-large w3-bottombar w3-border-blue" style="min-height: 50px; display:flex; align-items: center; margin-top:15px;">
+      <h1 class="w3-large w3-text-dark-gray"><b>Možda Vas zanimaju i sljedeći artikli</b></h1>
+    </div>
+    <div class="" style="display: flex; flex-wrap: wrap;justify-content:space-around">
       @foreach($mightAlsoLike as $product)
       <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
-        <div class="w3-col w3-container m4 l3 w3-padding-16 ">
-          <div class="w3-card-4 m5 l5">
-
-            <img style="width: 100%;" src="{{ productImage($product->image) }}" alt="{{ $product->name }}">
-            <div class="w3-container w3-center">
-              <b>
-                <p class="w3-left-align">{{ $product->name }}</p>
-              </b>
-              <div class="w3-section w3-left-align">
-                <span>{{ $product->presentPrice() }}</span>
-              </div>
-
-            </div>
-          </div>
+        <div style="max-width: 200px; margin-top: 16px">
+          @include('partials.product-card')
         </div>
       </a>
       @endforeach
     </div>
   </div>
-  <div class="w3-col w3-container m1 l1">
+  <div class="w3-col w3-container l1">
   </div>
 </div>
 @endif
