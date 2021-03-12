@@ -25,7 +25,7 @@
           </div>
           <div class="w3-container">
             <p>Total: {{ Cart::subtotal() }} KM</p>
-            <p>Ukupno stavki: {{ Cart::count() }}</p>
+            <p>Ukupno artikala: {{ Cart::count() }}</p>
           </div>
           <div class="w3-border-bottom ">
             <h4>Dostava</h4>
