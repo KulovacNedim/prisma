@@ -7,20 +7,17 @@
     </a>
     <!-- Right-sided navbar links -->
     <div class="w3-left w3-hide-small">
-      <!-- <div class="w3-dropdown-hover">
-        <button class="w3-button w3-white"><i class="fas fa-lightbulb"></i> RASVJETA</button>
-        <div class="w3-dropdown-content w3-bar-block w3-card-4">
-          <a href="#" class="w3-bar-item w3-button">Link 1</a>
-          <a href="#" class="w3-bar-item w3-button">Link 2</a>
-          <a href="#" class="w3-bar-item w3-button">Link 3</a>
-        </div>
-      </div> -->
-      <!-- <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-th"></i> ELEKTROMATERIJAL</a>
-      <a href="#work" class="w3-bar-item w3-button"><i class="fab fa-servicestack"></i> USLUGE</a>
-      <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> KONTAKT</a>
-      <a href="#contact" class="w3-bar-item w3-button"><i class="fas fa-building"></i> O NAMA</a> -->
-
       @foreach($items as $menu_item)
+      @if($menu_item->title === 'USLUGE')
+      <div class="w3-dropdown-hover">
+        <a class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="display: flex; justify-content: center; align-items:center; height: 65px;"><b><i class="{{ $menu_item->icon_class }}"></i> {{ $menu_item->title }}</b></a>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4" style="margin-top: 65px;">
+          @foreach($services as $service)
+          <a href="{{ route('service.show', [$service->id, $service->slug]) }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red">{{ $service->title }}</a>
+          @endforeach
+        </div>
+      </div>
+      @else
       <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="display: flex; justify-content: center; align-items:center; height: 65px;"><b><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;">
           </i>{{ $menu_item->title }}
           @if($menu_item->title === 'LISTA' && Cart::count() > 0)
@@ -28,6 +25,7 @@
           @endif
         </b>
       </a>
+      @endif
       @endforeach
 
     </div>
@@ -70,6 +68,17 @@
       </form>
     </div>
     @foreach($items as $menu_item)
+    @if($menu_item->title === 'USLUGE')
+    <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" onclick="myAccFunc()"><b><i class="{{ $menu_item->icon_class }}" style="margin-right: 10px;">
+        </i>{{ $menu_item->title }} <i class="fa fa-caret-down" style="margin-left: 8px;" id="sideBarServicesCarot"></i>
+      </b>
+    </a>
+    <div id="demoAcc" class="w3-hide w3-white w3-card">
+      @foreach($services as $service)
+      <a href="{{ route('service.show', [$service->id, $service->slug]) }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red">{{ $service->title }}</a>
+      @endforeach
+    </div>
+    @else
     <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red"><b><i class="{{ $menu_item->icon_class }}" style="margin-right: 10px;">
         </i>{{ $menu_item->title }}
         @if($menu_item->title === 'LISTA' && Cart::count() > 0)
@@ -77,6 +86,7 @@
         @endif
       </b>
     </a>
+    @endif
     @endforeach
 
   </nav>

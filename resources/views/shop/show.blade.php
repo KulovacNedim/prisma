@@ -26,7 +26,9 @@
         </div>
         <div class="w3-container" style="display:flex; align-items: start; justify-content: start; margin-top: 35px;">
           <b>
-            <p class="w3-large">BRAND: LKSAJDLASK</p>
+            @if($product->brand)
+            <p class="w3-large">BRAND: {{ $product->brand }}</p>
+            @endif
           </b>
         </div>
         <div class="w3-container" style="display:flex; align-items: start; justify-content: start;">
