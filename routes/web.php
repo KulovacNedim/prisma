@@ -45,6 +45,8 @@ Route::get('/service/{service}/{slug}', [App\Http\Controllers\ServiceController:
 
 Route::get('/guest-checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('guest-checkout.index');
 
+Route::get('/company', [App\Http\Controllers\CompanyInfoController::class, 'index'])->name('company.index');
+
 Route::get('/thankyou', [App\Http\Controllers\ConfirmationController::class, 'index'])->name('confirmation.index');
 
 
