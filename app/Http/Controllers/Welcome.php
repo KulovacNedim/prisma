@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Project;
@@ -24,6 +25,7 @@ class Welcome extends Controller
         $categories = Category::all();
         $saleProducts = Product::where('is_discount', 1)->get();
         $services = Service::where('is_active', 1)->get();
+        $brands = Brand::where('is_active', 1)->get();
         return view('welcome')->with([
             'slides' => $slides,
             'topProducts' => $topProducts,
@@ -31,6 +33,7 @@ class Welcome extends Controller
             'saleProducts' => $saleProducts,
             'projects' => $projects,
             'services' => $services,
+            'brands' => $brands,
         ]);
     }
 

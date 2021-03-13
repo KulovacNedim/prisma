@@ -163,12 +163,26 @@
 </div>
 
 <!-- BRANDS -->
-<div class="w3-row w3-margin-top w3-margin-bottom">
+<div class="w3-row w3-margin-top w3-margin-bottom w3-light-gray">
     <div class="w3-col w3-container l1 ">
     </div>
-    <div class="w3-col w3-container l10 w3-center">
-
-        55
+    <div class="w3-col w3-container l10 w3-center" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; min-height: 140px">
+        @foreach($brands as $brand)
+        <span class="w3-hide-small w3-hide-medium">
+            <div style="width: 150px; margin: 20px;">
+                <a href="{{$brand->link}}" target="_blank">
+                    <img src="{{ slideImage($brand->image) }}" style="width: 100%;">
+                </a>
+            </div>
+        </span>
+        <span class="w3-hide-large">
+            <div style="width: 100px; margin: 10px 20px;">
+                <a href="{{$brand->link}}" target="_blank">
+                    <img src="{{ slideImage($brand->image) }}" style="width: 100%;">
+                </a>
+            </div>
+        </span>
+        @endforeach
     </div>
     <div class="w3-col w3-container l1 ">
     </div>
