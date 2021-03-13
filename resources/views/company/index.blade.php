@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- SALE -->
 <div class="w3-row w3-margin-top w3-margin-bottom">
   <div class="w3-col w3-container l1 ">
   </div>
@@ -27,11 +26,13 @@
           <h3 class="w3-large w3-text-dark-gray"><b>KOMPANIJA</b></h3>
         </div>
         <div class="w3-row w3-margin-top">
-          <table class="w3-table w3-bordered  w3-striped">
-            <tr>
-              <th>Naziv</th>
-              <td>{{ $info->title }}</td>
-            </tr>
+          <table class="w3-table-all" style="border: none;">
+            <thead>
+              <tr class="w3-light-grey">
+                <th>Naziv</th>
+                <td>{{ $info->title }}</td>
+              </tr>
+            </thead>
             @foreach($sailPoints as $sailPoint)
             <tr>
               @if($loop->index == 0)
