@@ -41,6 +41,8 @@ Route::patch('/cart/{product}', [App\Http\Controllers\CartController::class, 'up
 Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
 Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 
+Route::get('/service/{service}/{slug}', [App\Http\Controllers\ServiceController::class, 'show'])->name('service.show');
+
 Route::get('/guest-checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('guest-checkout.index');
 
 Route::get('/thankyou', [App\Http\Controllers\ConfirmationController::class, 'index'])->name('confirmation.index');

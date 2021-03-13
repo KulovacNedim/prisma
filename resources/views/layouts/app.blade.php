@@ -29,10 +29,6 @@
             background-color: #f7f8f9;
         }
 
-        .w3-button {
-            /* width: 150px; */
-        }
-
         .w3-bar .w3-button {
             padding: 16px;
         }
@@ -132,7 +128,29 @@
         }
         // Toggle between showing and hiding the sidebar when clicking the menu icon
         var mainNav = document.getElementById("mainNav");
+
+        // sidebar accordion
+        function myAccFunc() {
+            var x = document.getElementById("demoAcc");
+            var y = document.getElementById("sideBarServicesCarot");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+                x.previousElementSibling.className += " w3-red";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+                x.previousElementSibling.className =
+                    x.previousElementSibling.className.replace(" w3-red", "");
+            }
+            if (y.className.indexOf("fa-caret-down") == -1) {
+                y.className += " fa-caret-down";
+                y.className = y.className.replace(" fa-caret-up", "");
+            } else {
+                y.className += " fa-caret-up";
+                y.className = y.className.replace(" fa-caret-down", "");
+            }
+        }
     </script>
+
 </body>
 
 </html>

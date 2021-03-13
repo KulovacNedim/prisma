@@ -28,7 +28,7 @@
 </div>
 
 <!-- CATEGORIES AND TOP PRODACTS -->
-<div class="w3-row w3-margin-top">
+<div class="w3-row w3-margin-top w3-margin-bottom">
     <div class="w3-col w3-container l1 ">
     </div>
     <div class="w3-col w3-container l10 w3-center">
@@ -74,13 +74,66 @@
             </div>
         </div>
     </div>
+    <div class="w3-col w3-container l1 ">
+    </div>
 </div>
-<div class="w3-col w3-container l1 ">
-</div>
+
+<!-- SERVICES AND PROJECTS -->
+<div class="w3-row w3-margin-top w3-margin-bottom">
+    <div class="w3-col w3-container l1 ">
+    </div>
+    <div class="w3-col w3-container l10 w3-center">
+        <div class="w3-col l7 w3-center" style="padding-right: 10px;">
+            <div class="w3-container w3-large w3-blue" style="height: 50px; display:flex; align-items: center">
+                USLUGE
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; align-content: space-around; min-height: 300px;">
+                @foreach($services as $service)
+                @if($service->show_on_landing_page)
+                <div>
+                    <a href="{{ route('service.show', [$service->id, $service->slug]) }}">
+                        <div style="display: flex; align-items:center; justify-content:start; height: 90px; width: 250px; margin: 15px 0;" class="w3-light-gray w3-round">
+                            @if($service->icon)
+                            <div class="w3-text-light-blue w3-margin-right" style="font-size: 60px; margin: auto 8px;"><i class="{{ $service->icon }}"></i></div>
+                            @else
+                            <div class="w3-text-light-blue w3-margin-right" style="font-size: 60px; margin: auto 8px;"><i class="fas fa-cogs"></i></div>
+                            @endif
+                            <div style="text-align: left" class="w3-text-light-darkgray"><b>{{ strtoupper($service->title) }}</b></div>
+                        </div>
+                    </a>
+                </div>
+                @endif
+                @endforeach
+            </div>
+        </div>
+        <div class="w3-col l5 w3-center">
+            <div class="">
+                <div class="w3-container w3-large w3-blue" style="height: 50px; display:flex; align-items: center">
+                    NAŠI PROJEKTI
+                </div>
+                <div class="w3-row-padding">
+                    <div class="w3-display-container w3-margin-top">
+                        @foreach($projects as $project)
+                        <div class="w3-display-container projectSlides" style="max-height:400px; overflow:hidden; text-align:left;">
+                            <img src="{{ slideImage($project->image) }}" style="width: 100%;max-height: 300px;" class="w3-animate-right;">
+                            @if($project->title)
+                            <div class="w3-hide-small w3-display-bottomleft w3-opacity-min w3-container w3-margin w3-white w3-round">
+                                <b>
+                                    <p class="w3-animate-left">{{ $project->title }}</p>
+                                </b>
+                            </div>
+                            @endif
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- SALE -->
-<div class="w3-row w3-margin-top">
+<div class="w3-row w3-margin-top w3-margin-bottom">
     <div class="w3-col w3-container l1 ">
     </div>
     <div class="w3-col w3-container l10 w3-center">
@@ -105,15 +158,27 @@
             </div>
         </div>
     </div>
+    <div class="w3-col w3-container l1 ">
+    </div>
 </div>
-<div class="w3-col w3-container l1 ">
-</div>
+
+<!-- BRANDS -->
+<div class="w3-row w3-margin-top w3-margin-bottom">
+    <div class="w3-col w3-container l1 ">
+    </div>
+    <div class="w3-col w3-container l10 w3-center">
+
+        55
+    </div>
+    <div class="w3-col w3-container l1 ">
+    </div>
 </div>
 
 @endsection
 
 @section('extra-js')
 <script>
+    // top slider 
     var slideIndex = 0;
     carousel();
 
@@ -130,6 +195,25 @@
         x[slideIndex - 1].style.display = "block";
         setTimeout(carousel, 2700); // Change image every 2 seconds
     }
+
+    // projects slider
+    var projectIndex = 0;
+    projectCarousel();
+
+    function projectCarousel() {
+        var j;
+        var z = document.getElementsByClassName("projectSlides");
+        for (j = 0; j < z.length; j++) {
+            z[j].style.display = "none";
+        }
+        projectIndex++;
+        if (projectIndex > z.length) {
+            projectIndex = 1
+        }
+        z[projectIndex - 1].style.display = "block";
+        setTimeout(projectCarousel, 2700); // Change image every 2 seconds
+    }
+
 
     // accordion - categories
     function openCategoriesMenu(id) {
