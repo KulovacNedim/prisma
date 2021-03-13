@@ -4,6 +4,7 @@ use App\Mail\OrderPlaced;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Facades\Voyager;
 
@@ -44,6 +45,10 @@ Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store
 Route::get('/service/{service}/{slug}', [App\Http\Controllers\ServiceController::class, 'show'])->name('service.show');
 
 Route::get('/guest-checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('guest-checkout.index');
+
+Route::get('/company', [App\Http\Controllers\CompanyInfoController::class, 'index'])->name('company.index');
+Route::get('/contact-us', [App\Http\Controllers\ContactUsController::class, 'index'])->name('contact-us.index');
+Route::post('/contact-us', [App\Http\Controllers\ContactUsController::class, 'store'])->name('contact-us.store');
 
 Route::get('/thankyou', [App\Http\Controllers\ConfirmationController::class, 'index'])->name('confirmation.index');
 

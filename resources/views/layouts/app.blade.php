@@ -87,6 +87,10 @@
             left: -1%;
             width: 102%;
         }
+
+        textarea {
+            resize: none;
+        }
     </style>
     <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css"> -->
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
