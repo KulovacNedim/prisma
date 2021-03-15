@@ -34,6 +34,14 @@
       <!-- <a href="{{ route('register') }}" class="w3-bar-item w3-button"><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;"></i> REGISTRACIJA</a> -->
       <b><a href="{{ route('login') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="display: flex; justify-content: center; align-items:center; height: 65px;"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i> LOGIN</a></b>
       @else
+
+      <div class="w3-dropdown-hover">
+        <b><a href="{{ route('users.edit') }}" class="w3-bar-item w3-button w3-text-gray w3-white w3-hover-red" style="display: flex; justify-content: center; align-items:center; height: 65px;"><i class="fas fa-user" style="margin-right: 5px;"></i> MOJ PROFIL</a></b>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4" style="margin-top: 65px;">
+          <a href="{{ route('users.edit') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red">Profil</a>
+          <a href="{{ route('orders.index') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red">Upiti</a>
+        </div>
+      </div>
       <b><a href="{{ route('logout') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" onclick="event.preventDefault();document.getElementById('logout-form').submit()" style="display: flex; justify-content: center; align-items:center; height: 65px;"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> LOGOUT</a></b>
       @endguest
       <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
@@ -61,6 +69,7 @@
       <!-- <a href="{{ route('register') }}" class="w3-bar-item w3-button"><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;"></i> REGISTRACIJA</a> -->
       <b><a href="{{ route('login') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="height: 40px; display: flex;  align-items:center; border-bottom: 1px solid #999; margin-bottom: 10px;"><i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i> LOGIN</a></b>
       @else
+      <b><a href="{{ route('users.edit') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="height: 40px; display: flex;  align-items:center; border-top: 1px solid #999; margin-bottom: 10px;"><i class="fas fa-user" style="margin-right: 5px;"></i> MOJ PROFIL</a></b>
       <b><a href="{{ route('logout') }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" onclick="event.preventDefault();document.getElementById('logout-form').submit()" style="height: 40px; display: flex;  align-items:center; border-bottom: 1px solid #999; margin-bottom: 10px;"><i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> LOGOUT</a></b>
       @endguest
       <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
