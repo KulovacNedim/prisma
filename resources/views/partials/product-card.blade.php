@@ -16,16 +16,38 @@
       <div class="w3-col s8 m8 l8"><span class="w3-left" style="height: 38px;display: flex; align-items: center">{{ $product->presentPrice() }}</span></div>
       @endif
       <div class="w3-col s4 m4 l4">
-        <form action="{{ route('cart.store') }}" method="POST">
-          @csrf
-          <input type="hidden" name="id" value="{{ $product->id }}" />
-          <input type="hidden" name="name" value="{{ $product->name }}" />
-          <input type="hidden" name="price" value="{{ $product->price }}" />
-          <!-- <button class="w3-button w3-xlarge w3-teal">+</button> -->
-          <button class="w3-button w3-blue w3-hover-red w3-right" type="submit"><i class="fas fa-cart-plus"></i></button>
-        </form>
+        <button class="w3-button w3-blue w3-hover-red w3-right click" type="button" data-id="{{ $product->id }}" style="z-index: 999;"><i class="fas fa-cart-plus"></i></button>
       </div>
     </div>
 
   </div>
 </div>
+
+@section('extra-js')
+<script src="{{ asset('js/app.js') }}"></script>
+<script>
+  (function() {
+    const clickClassName = document.querySelectorAll('.click');
+    const clickBtns = Array.from(clickClassName);
+    clickBtns.forEach(child => {
+      child.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const id = child.getAttribute('data-id');
+        axios.post(`/cart`, {
+            id: id
+          })
+          .then(function(res) {
+            var x = document.getElementsByClassName("count");
+            for (var i = 0; i < x.length; i++) {
+              x[i].innerHTML = res.data.quantity;
+            }
+          })
+          .catch(function(err) {
+            console.log(err);
+          })
+      })
+    });
+  })();
+</script>
+@endsection

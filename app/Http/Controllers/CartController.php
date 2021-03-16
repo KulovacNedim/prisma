@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Cart as ShoppingcartCart;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,20 +47,10 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
-        });
-
-        if ($duplicates->isNotEmpty()) {
-            $request->session()->flash('warning', 'Artikal je već na listi');
-            return redirect()->route('cart.index');
-        }
-
-        Cart::add($request->id, $request->name, 1, $request->price)
+        $product = Product::find($request->id);
+        Cart::add($product->id, $product->name, 1, $product->price)
             ->associate('\App\Models\Product');
-
-        $request->session()->flash('success', 'Artikal je dodan na listu za upit');
-        return redirect()->route('cart.index');
+        return response()->json(['quantity' => Cart::count()]);
     }
 
     /**

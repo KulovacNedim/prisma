@@ -44,13 +44,7 @@
           <p style="margin-top: 25px;">{!! $product->description !!}</p>
         </div>
         <div class="w3-container w3-center">
-          <form action="{{ route('cart.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="id" value="{{ $product->id }}" />
-            <input type="hidden" name="name" value="{{ $product->name }}" />
-            <input type="hidden" name="price" value="{{ $product->price }}" />
-            <button class="w3-button w3-blue w3-hover-orange" style=" margin-top:25px" type="submit">Dodaj na listu za upit</button>
-          </form>
+          <button class="w3-button w3-blue w3-hover-red  click" type="button" data-id="{{ $product->id }}">Dodaj na listu za upit</button>
         </div>
 
         @if($product->is_discount)

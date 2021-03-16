@@ -29,7 +29,7 @@
               <button type="submit" class="w3-button w3-bar-item w3-small w3-hide-small w3-blue w3-hover-red">X</button>
             </form>
           </span>
-         
+
 
           <div class="w3-hide-small">
             <a href="{{ route('shop.show', [$item->model->id, $item->model->slug]) }}">
@@ -40,13 +40,13 @@
               </div>
             </a>
             <div class="w3-bar-item w3-right" style="min-width: 130px">
-            <span class="w3-large w3-right">{{ $item->subtotal }} KM</span>
-          </div>
-          <div class="w3-bar-item w3-right">
-            <span class="w3-large">
-              <input type="text" value="{{ $item-> qty }}" data-id="{{ $item->rowId }}" class="quantity" style="width: 80px; text-align: right">
-            </span>
-          </div>
+              <span class="w3-large w3-right">{{ $item->subtotal }} KM</span>
+            </div>
+            <div class="w3-bar-item w3-right">
+              <span class="w3-large">
+                <input type="text" value="{{ $item-> qty }}" data-id="{{ $item->rowId }}" class="quantity" style="width: 80px; text-align: right">
+              </span>
+            </div>
           </div>
           <div class="w3-hide-medium w3-hide-large w3-row">
             <div class="w3-col s5">{{ $item->model->name }}</div>
@@ -88,29 +88,6 @@
   <div class="w3-col w3-container l1">
   </div>
 </div>
-
-@if (Cart::count() > 0)
-<div class="w3-row w3-margin-bottom w3-light-gray" style="margin-top: 30px;">
-  <div class="w3-col w3-container l1">
-  </div>
-  <div class="w3-col w3-container l10">
-    <div class="w3-container w3-large w3-bottombar w3-border-blue" style="min-height: 50px; display:flex; align-items: center; margin-top:15px;">
-      <h1 class="w3-large w3-text-dark-gray"><b>Možda Vas zanimaju i sljedeći artikli</b></h1>
-    </div>
-    <div class="" style="display: flex; flex-wrap: wrap;justify-content:space-around">
-      @foreach($mightAlsoLike as $product)
-      <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
-        <div style="max-width: 200px; margin-top: 16px">
-          @include('partials.product-card')
-        </div>
-      </a>
-      @endforeach
-    </div>
-  </div>
-  <div class="w3-col w3-container l1">
-  </div>
-</div>
-@endif
 
 @endsection
 
