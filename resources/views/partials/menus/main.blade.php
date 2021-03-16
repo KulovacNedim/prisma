@@ -22,6 +22,8 @@
           </i>{{ $menu_item->title }}
           @if($menu_item->title === 'LISTA' && Cart::count() > 0)
           <span class="w3-badge w3-small w3-yellow count" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
+          @elseif($menu_item->title === 'LISTA' && Cart::count() == 0)
+          <span class="w3-small w3-yellow count" style="position:relative; top: -2px;"></span>
           @endif
         </b>
       </a>
@@ -92,6 +94,8 @@
         </i>{{ $menu_item->title }}
         @if($menu_item->title === 'LISTA' && Cart::count() > 0)
         <span class="w3-badge w3-small w3-yellow count" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
+        @elseif($menu_item->title === 'LISTA' && Cart::count() == 0)
+        <span class="w3-small w3-yellow count" style="position:relative; top: -2px;"></span>
         @endif
       </b>
     </a>

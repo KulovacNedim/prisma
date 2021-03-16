@@ -13,7 +13,7 @@
   <div class="w3-col w3-container l10">
     <div class="w3-row w3-large w3-bottombar w3-border-blue">
       <h1 class=" w3-large w3-col m9 l9" style="min-height: 40px; display: flex; align-items: center;">
-        <b>LISTA ZA UPIT (Broj artikala: {{ Cart::count() }})</b>
+        <b>LISTA ZA UPIT (Broj artikala: <span id="countHeader">{{ Cart::count() }}</span>)</b>
       </h1>
       <span class="w3-col m3 l3"><a href="{{ route('shop.index') }}"><button class="w3-button w3-amber w3-hover-blue w3-hide-medium" style="width: 100%; margin:7px 0">Nastavite kupovati</button></a></span>
       <span class="w3-col m3 l3"><a href="{{ route('shop.index') }}"><button class="w3-button w3-amber w3-hover-blue w3-small w3-hide-small w3-hide-large" style="width: 100%; margin:7px 0">Nastavite kupovati</button></a></span>
@@ -106,12 +106,15 @@
 
         function timer() {
           const id = elem.getAttribute('data-id');
-          console.log(that.value)
           axios.patch(`/cart/${id}`, {
               quantity: that.value
             })
             .then(function(res) {
-              window.location.href = "{{ route('cart.index') }}"
+              var x = document.getElementsByClassName("count");
+              for (var i = 0; i < x.length; i++) {
+                x[i].innerHTML = res.data.quantity;
+              }
+              document.getElementById('countHeader').innerHTML = res.data.quantity;
             })
             .catch(function(err) {
               console.log(err);
