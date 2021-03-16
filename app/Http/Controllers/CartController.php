@@ -93,7 +93,7 @@ class CartController extends Controller
         }
 
         Cart::update($id, $request->quantity);
-        return response()->json(['success' => true]);
+        return response()->json(['quantity' => Cart::count()]);
     }
 
     /**

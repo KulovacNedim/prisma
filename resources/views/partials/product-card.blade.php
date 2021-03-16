@@ -40,6 +40,9 @@
           .then(function(res) {
             var x = document.getElementsByClassName("count");
             for (var i = 0; i < x.length; i++) {
+              if (!x[i].classList.contains('w3-badge')) {
+                x[i].className += " w3-badge";
+              }
               x[i].innerHTML = res.data.quantity;
             }
           })
