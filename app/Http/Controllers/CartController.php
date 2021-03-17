@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Product;
-use Gloudemans\Shoppingcart\Cart as ShoppingcartCart;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -106,7 +105,6 @@ class CartController extends Controller
     {
         Cart::remove($id);
 
-        Session::flash('success', 'Artikal je izbrisan sa liste');
-        return back();
+        return response()->json(['quantity' => Cart::count()]);
     }
 }

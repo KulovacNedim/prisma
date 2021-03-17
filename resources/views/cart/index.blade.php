@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="w3-row">
-  <div class="w3-col w3-container">
-    @include('partials.alerts')
-  </div>
-</div>
-
 <div class="w3-row w3-margin-bottom  w3-text-dark-gray" style="margin-top: 30px;">
   <div class="w3-col w3-container l1">
   </div>
@@ -21,13 +15,9 @@
     <div>
       <ul class="w3-ul" style="margin-top: 8px;">
         @foreach(Cart::content() as $item)
-        <li class="w3-bar">
+        <li class="w3-bar" id="{{ ($item->model->id).'-ul' }}">
           <span onclick="this.parentElement.style.display='none'" class="w3-right">
-            <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
-              @csrf
-              {{ method_field('DELETE') }}
-              <button type="submit" class="w3-button w3-bar-item w3-small w3-hide-small w3-blue w3-hover-red">X</button>
-            </form>
+            <button type="button" class="w3-button w3-bar-item w3-small w3-hide-small w3-blue w3-hover-red x-btn" data-id="{{ $item->rowId }}" style="padding: 7px 15px;">X</button>
           </span>
 
 
@@ -48,16 +38,14 @@
               </span>
             </div>
           </div>
-          <div class="w3-hide-medium w3-hide-large w3-row">
+          <div class="w3-hide-medium w3-hide-large w3-row" onclick="this.parentElement.style.display='none'">
             <div class="w3-col s5">{{ $item->model->name }}</div>
             <div class="w3-col s3"><input type="text" value="{{ $item-> qty }}" data-id="{{ $item->rowId }}" class="quantity" style="width: 60px; text-align: right"></div>
             <div class="w3-col s3">{{ $item->subtotal }} KM</div>
             <div class="w3-col s1">
-              <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
-                @csrf
-                {{ method_field('DELETE') }}
-                <button type="submit" class="w3-button  w3-tiny w3-blue w3-hover-red" style="padding: 7px 15px;">X</button>
-              </form>
+              <span>
+                <button type="button" class="w3-button  w3-tiny w3-blue w3-hover-red x-btn" data-id="{{ $item->rowId }}" style="padding: 7px 15px;">X</button>
+              </span>
             </div>
           </div>
 
@@ -93,6 +81,46 @@
 
 @section('extra-js')
 <script src="{{ asset('js/app.js') }}"></script>
+<script>
+  (function() {
+    const clickXbtnClassName = document.querySelectorAll('.x-btn');
+    const clickXBtns = Array.from(clickXbtnClassName);
+    clickXBtns.forEach(child => {
+      child.addEventListener('click', (e) => {
+        // e.stopPropagation();
+        // e.preventDefault();
+        const id = child.getAttribute('data-id');
+        console.log(id)
+        axios.post(`/cart/${id}`)
+          .then(function(res) {
+            console.log(res)
+            var x = document.getElementsByClassName("count");
+            for (var i = 0; i < x.length; i++) {
+              if (!x[i].classList.contains('w3-badge')) {
+                x[i].className += " w3-badge";
+              }
+              x[i].innerHTML = res.data.quantity;
+            }
+            document.getElementById('countHeader').innerHTML = res.data.quantity;
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000
+            });
+            Toast.fire({
+              icon: 'success',
+              title: 'Artikal obrisan sa liste',
+            })
+          })
+          .catch(function(err) {
+            console.log(err);
+          })
+      })
+    });
+  })();
+</script>
+
 <script>
   (function() {
     const classname = document.querySelectorAll('.quantity')

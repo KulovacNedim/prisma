@@ -1,10 +1,6 @@
 <?php
 
-use App\Mail\OrderPlaced;
-use App\Models\Order;
 use Illuminate\Support\Facades\Route;
-use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Facades\Voyager;
 
@@ -36,7 +32,7 @@ Route::get('/shop/{product}/{slug}', [App\Http\Controllers\ShopController::class
 
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
-Route::delete('/cart/{product}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/cart/{product}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
 Route::patch('/cart/{product}', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
 
 Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\SailPoint;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ContactUsController extends Controller
 {
@@ -21,6 +22,7 @@ class ContactUsController extends Controller
     public function store(Request $request)
     {
         Mail::send(new ContactUsMail($request));
+        Alert::success('Vaš mail je zaprimljen.', 'Odgovor možete očekivati u roku od 24 sata.');
         return back();
     }
 }

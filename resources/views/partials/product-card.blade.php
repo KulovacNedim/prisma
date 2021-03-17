@@ -45,6 +45,18 @@
               }
               x[i].innerHTML = res.data.quantity;
             }
+
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000
+            });
+            Toast.fire({
+              icon: 'success',
+              title: 'Artikal dodan na listu',
+            })
+
           })
           .catch(function(err) {
             console.log(err);
