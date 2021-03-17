@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/7f799c9eb6.js" crossorigin="anonymous"></script>
 
-
     <style>
         body {
             font-family: 'Nunito';
@@ -92,8 +91,6 @@
             resize: none;
         }
     </style>
-    <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css"> -->
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
 </head>
 
 <body>
@@ -102,9 +99,9 @@
     {{ menu('main', 'partials.menus.main') }}
 
     <main class="" style="margin-top: 80px;">
-        <!-- @include('partials.alerts') -->
         @yield('content')
     </main>
+    @include('partials.footer')
 
 
     @yield('extra-js')
@@ -154,7 +151,62 @@
             }
         }
     </script>
+    <script>
+        // top slider 
+        var slideIndex = 0;
+        carousel();
 
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("coverSlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > x.length) {
+                slideIndex = 1
+            }
+            x[slideIndex - 1].style.display = "block";
+            setTimeout(carousel, 2700); // Change image every 2 seconds
+        }
+
+        // projects slider
+        var projectIndex = 0;
+        projectCarousel();
+
+        function projectCarousel() {
+            var j;
+            var z = document.getElementsByClassName("projectSlides");
+            for (j = 0; j < z.length; j++) {
+                z[j].style.display = "none";
+            }
+            projectIndex++;
+            if (projectIndex > z.length) {
+                projectIndex = 1
+            }
+            z[projectIndex - 1].style.display = "block";
+            setTimeout(projectCarousel, 2700); // Change image every 2 seconds
+        }
+
+
+        // accordion - categories
+        function openCategoriesMenu(id) {
+            var x = document.getElementById(id);
+            var y = document.getElementById('cat_caret');
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+            // caret control
+            if (y.className.indexOf("fa-caret-up") == -1) {
+                y.className += " fa-caret-up";
+            } else {
+                y.className = y.className.replace(" fa-caret-up", "");
+            }
+        }
+    </script>
+    @include('sweetalert::alert')
 </body>
 
 </html>

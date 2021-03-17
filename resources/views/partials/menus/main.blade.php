@@ -21,9 +21,9 @@
       <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red" style="display: flex; justify-content: center; align-items:center; height: 65px;"><b><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;">
           </i>{{ $menu_item->title }}
           @if($menu_item->title === 'LISTA' && Cart::count() > 0)
-          <span class="w3-badge w3-small w3-yellow count" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
+          <span class="w3-badge w3-small w3-text-white w3-orange count" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
           @elseif($menu_item->title === 'LISTA' && Cart::count() == 0)
-          <span class="w3-small w3-yellow count" style="position:relative; top: -2px;"></span>
+          <span class="w3-small w3-text-white w3-orange count" style="position:relative; top: -2px;"></span>
           @endif
         </b>
       </a>
@@ -93,9 +93,9 @@
     <a href="{{ $menu_item->link() }}" class="w3-bar-item w3-button w3-text-gray w3-hover-red"><b><i class="{{ $menu_item->icon_class }}" style="margin-right: 10px;">
         </i>{{ $menu_item->title }}
         @if($menu_item->title === 'LISTA' && Cart::count() > 0)
-        <span class="w3-badge w3-small w3-yellow count" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
+        <span class="w3-badge w3-small w3-text-white w3-orange count" style="position:relative; top: -2px;">{{ Cart::count() }}</span>
         @elseif($menu_item->title === 'LISTA' && Cart::count() == 0)
-        <span class="w3-small w3-yellow count" style="position:relative; top: -2px;"></span>
+        <span class="w3-small w3-text-white w3-orange count" style="position:relative; top: -2px;"></span>
         @endif
       </b>
     </a>
