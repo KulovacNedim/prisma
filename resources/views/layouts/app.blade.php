@@ -101,8 +101,6 @@
     <main class="" style="margin-top: 80px;">
         @yield('content')
     </main>
-    @include('partials.footer')
-
 
     @yield('extra-js')
 

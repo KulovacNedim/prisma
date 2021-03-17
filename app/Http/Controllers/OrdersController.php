@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OrdersController extends Controller
 {
@@ -50,6 +51,7 @@ class OrdersController extends Controller
     public function show(Order $order)
     {
         if (auth()->id() !== $order->user_id) {
+            Alert::error('Nemate pristup traženim podacima');
             return back()->withErrors('Nemate pristup ovom upitu');
         }
 

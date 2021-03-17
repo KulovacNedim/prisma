@@ -163,10 +163,10 @@
 </div>
 
 <!-- BRANDS -->
-<div class="w3-row w3-margin-top w3-margin-bottom w3-light-gray">
+<div class="w3-row w3-margin-top w3-margin-bottom w3-light-gray w3-hide-small">
     <div class="w3-col w3-container l1 ">
     </div>
-    <div class="w3-col w3-container l10 w3-center" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; min-height: 140px">
+    <div class="w3-col w3-container l10 w3-center" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; min-height: 140px">
         @foreach($brands as $brand)
         <span class="w3-hide-small w3-hide-medium">
             <div style="width: 150px; margin: 20px;">
@@ -187,5 +187,7 @@
     <div class="w3-col w3-container l1 ">
     </div>
 </div>
+
+@include('partials.footer')
 
 @endsection

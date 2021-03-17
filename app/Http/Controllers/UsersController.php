@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UsersController extends Controller
 {
@@ -73,6 +74,8 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . auth()->id()],
             'password' => ['sometimes', 'nullable', 'string', 'min:8', 'confirmed'],
         ]);
+
+        Alert::success('Informacije pohranjene!');
 
         $user = auth()->user();
         $input = $request->except('password', 'password_confirmation');

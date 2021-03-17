@@ -99,4 +99,7 @@
   <div class="w3-col w3-container l1 ">
   </div>
 </div>
+
+@include('partials.footer')
+
 @endsection

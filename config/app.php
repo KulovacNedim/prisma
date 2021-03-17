@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\NavigationComposerProvider::class,
+        App\Providers\FooterProvider::class,
 
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
