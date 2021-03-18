@@ -31,6 +31,7 @@
       @endforeach
 
     </div>
+
     <div class="w3-right w3-hide-small">
       @guest
       <!-- <a href="{{ route('register') }}" class="w3-bar-item w3-button"><i class="{{ $menu_item->icon_class }}" style="margin-right: 5px;"></i> REGISTRACIJA</a> -->
@@ -49,13 +50,17 @@
       <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
         {{ csrf_field() }}
       </form>
-
     </div>
+
+
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-text-gray w3-hide-medium w3-hover-red" style="display: flex; justify-content: center; align-items:center;width:60px; height: 65px;" onclick="w3_open_main_nav()">
       <i class="fa fa-bars"></i>
     </a>
+    <span class=" w3-right">
+      @include('partials.search-box')
+    </span>
   </div>
 
   <nav class="w3-bar-block w3-collapse w3-animate-left w3-hide-medium w3-hide-large w3-light-gray" id="main_nav" style="display:none; z-index:99; width: 100%; max-width:250px; height: 100vh; position: absolute; top:0">
