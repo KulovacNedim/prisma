@@ -70,3 +70,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-orders', [App\Http\Controllers\OrdersController::class, 'index'])->name('orders.index');
     Route::get('/my-orders/{order}', [App\Http\Controllers\OrdersController::class, 'show'])->name('orders.show');
 });
+
+Route::get('/search', [App\Http\Controllers\ShopController::class, 'search'])->name('search');

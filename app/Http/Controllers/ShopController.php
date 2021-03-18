@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -54,5 +55,12 @@ class ShopController extends Controller
             'product' => $product,
             'mightAlsoLike' => $mightAlsoLike
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $products = Product::search($query)->paginate(12);
+        return view('search-results')->with('products', $products);
     }
 }

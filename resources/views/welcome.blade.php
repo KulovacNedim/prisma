@@ -27,6 +27,17 @@
     </div>
 </div>
 
+<!-- SEARCH -->
+<div class="w3-row w3-margin-top w3-margin-bottom w3-hide-large">
+    <div class="w3-col w3-container l1 ">
+    </div>
+    <div class="w3-col w3-container l10 w3-center">
+        @include('partials.search-box')
+    </div>
+    <div class="w3-col w3-container l1 ">
+    </div>
+</div>
+
 <!-- CATEGORIES AND TOP PRODACTS -->
 <div class="w3-row w3-margin-top w3-margin-bottom">
     <div class="w3-col w3-container l1 ">
