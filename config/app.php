@@ -180,6 +180,7 @@ return [
 
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
 
     ],
 
@@ -235,6 +236,7 @@ return [
 
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
 
     ],
 

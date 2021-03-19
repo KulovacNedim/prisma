@@ -10,7 +10,7 @@ use App\Models\Service;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 
-class Welcome extends Controller
+class WelcomeController extends Controller
 {
     /**
      * Display a listing of the resource.

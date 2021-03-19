@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Http\Client\Request as ClientRequest;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ShopController extends Controller
 {
@@ -17,6 +17,8 @@ class ShopController extends Controller
      */
     public function index()
     {
+        SEOMeta::setTitle('Shop');
+
         $pagination = 10;
         $categories = Category::all();
 
@@ -50,6 +52,13 @@ class ShopController extends Controller
     {
         $product = Product::where('id', $productId)->firstOrFail();
         $mightAlsoLike = Category::find($product->categories()->first()->id)->products()->mightAlsoLike()->get();
+
+        SEOMeta::setTitle($product->name);
+        SEOMeta::setDescription($product->description);
+
+        OpenGraph::setTitle($product->name);
+        OpenGraph::setDescription($product->description);
+        OpenGraph::addImage(productImage($product->image));
 
         return view('shop.show')->with([
             'product' => $product,
