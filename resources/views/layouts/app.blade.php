@@ -5,10 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
+    {!! SEOMeta::generate() !!}
+    {!! OpenGraph::generate() !!}
 
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
@@ -22,75 +25,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/7f799c9eb6.js" crossorigin="anonymous"></script>
 
-    <style>
-        body {
-            font-family: 'Nunito';
-            background-color: #f7f8f9;
-        }
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
 
-        .w3-bar .w3-button {
-            padding: 16px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .invalid-feedback {
-            display: block;
-            margin-top: -5;
-            margin-bottom: 22px;
-            color: red;
-        }
-
-        .w3-sidebar {
-            z-index: 3;
-            width: 250px;
-            top: 60px;
-            bottom: 0;
-            height: inherit;
-        }
-
-        .coverSlides {
-            display: none;
-        }
-
-
-        s,
-        strike {
-            text-decoration: none;
-            position: relative;
-        }
-
-        s::before,
-        strike::before {
-            top: 50%;
-            /*tweak this to adjust the vertical position if it's off a bit due to your font family */
-            background: red;
-            /*this is the color of the line*/
-            opacity: 1;
-            content: '';
-            width: 110%;
-            position: absolute;
-            height: .1em;
-            border-radius: .1em;
-            left: -5%;
-            white-space: nowrap;
-            display: block;
-            transform: rotate(-15deg);
-        }
-
-        s.straight::before,
-        strike.straight::before {
-            transform: rotate(0deg);
-            left: -1%;
-            width: 102%;
-        }
-
-        textarea {
-            resize: none;
-        }
-    </style>
 </head>
 
 <body>

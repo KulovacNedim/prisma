@@ -15,7 +15,7 @@ use TCG\Voyager\Facades\Voyager;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Welcome::class, 'index'])->name('welcome');
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
 // Route::get('/products', [ProductController::class, 'index'])->middleware('auth');
 // Route::get('/products/create',  [ProductController::class, 'create']);
