@@ -42,7 +42,7 @@ return [
             'url'         => null, // Set null for using Url::current(), set false to total remove
             'type'        => 'website',
             'site_name'   => false,
-            'images'      => [asset('/img/lp.png')],
+            'images'      => ['https://elektroprizma.ba/public/img/lp.png'],
         ],
     ],
     'twitter' => [

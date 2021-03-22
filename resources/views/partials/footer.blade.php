@@ -38,7 +38,7 @@
   <div class="w3-col w3-container l1 ">
   </div>
 </div>
-<div class="w3-row w3-orange w3-text-white w3-margin-bottom">
+<div class="w3-row w3-text-white w3-margin-bottom" style="background-color: #0d8bf2;">
   <div class="w3-container w3-center" style="margin: 7px 0;">
     &#169; ELEKTROPRIZMA {{ now()->year }}
   </div>
