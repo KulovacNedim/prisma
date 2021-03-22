@@ -6,37 +6,45 @@
     </div>
 
     <div class="w3-col w3-container m10 l10 w3-padding ">
-        <div class="w3-row w3-card w3-margin-top">
-            <div class="w3-col w3-container l12 w3-margin-top w3-padding ">
-                <div class="w3-margin"><br>
-                    <h3>RESET PASSWORDA</h3>
+        <div class="w3-row w3-margin-top">
+            <div class="w3-col w3-container w3-margin-top w3-padding ">
+                <div class="w3-container w3-large w3-border-blue w3-bottombar" style="height: 50px; display:flex; align-items: center">
+                    RESET PASSWORD-A
                 </div>
+                <div class="w3-row" style="margin-top: 25px;">
+                    <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+                        <input type="hidden" name="token" value="{{ $token }}">
 
-                <form class="w3-container" method="POST" action="{{ route('password.update') }}">
-                    @csrf
-                    <input type="hidden" name="token" value="{{ $token }}">
-                    <div class="w3-section">
-                        <label><b>e-mail</b></label>
-                        <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Vaš email" id="email" name="email" value="{{ $email ?? old('email') }}" required>
+                        <p>
+                            <input class="w3-input" type="email" placeholder="e-mail adresa" name="email" id="email" value="{{ $email ?? old('email') }}" required>
+                        </p>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <label><b>Password</b></label>
-                        <input class="w3-input w3-border w3-margin-bottom" type="password" placeholder="Unesite novi password" name="password" id="password" required autocomplete="new-password">
+
+                        <p>
+                            <input class="w3-input" type="password" placeholder="Novi password" name="password" id="password" autocomplete="new-password" required>
+                        </p>
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <label><b>Potvrdite password</b></label>
-                        <input id="password-confirm" class="w3-input w3-border w3-margin-bottom" type="password" placeholder="Potvrdite password" name="password_confirmation" required autocomplete="new-password">
-
-
-                        <button class="w3-button w3-block w3-blue w3-hover-orange w3-section w3-padding" type="submit">Reset passworda</button>
-                    </div>
-                </form>
+                        <p>
+                            <input class="w3-input" id="password-confirm" type="password" placeholder="Potvrdite novi password" name="password_confirmation" autocomplete="new-password" required>
+                        </p>
+                        <div class="w3-row">
+                            <div class="w3-col m6 l6">
+                                <button class="w3-button w3-block w3-blue w3-hover-orange w3-section w3-padding w3-tiny" type="submit">Snimi novi password</button>
+                            </div>
+                            <div class="w3-col m6 l6">
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
