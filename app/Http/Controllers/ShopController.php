@@ -51,7 +51,11 @@ class ShopController extends Controller
     public function show($productId, $slug)
     {
         $product = Product::where('id', $productId)->firstOrFail();
-        $mightAlsoLike = Category::find($product->categories()->first()->id)->products()->mightAlsoLike()->get();
+        if ($product->categories()->first()) {
+            $mightAlsoLike = Category::find($product->categories()->first()->id)->products()->mightAlsoLike()->get();
+        } else {
+            $mightAlsoLike = Product::inRandomOrder()->take(4)->get();
+        }
 
         SEOMeta::setTitle($product->name);
         SEOMeta::setDescription($product->description);
