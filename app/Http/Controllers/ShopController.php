@@ -19,17 +19,17 @@ class ShopController extends Controller
     {
         SEOMeta::setTitle('Shop');
 
-        $pagination = 10;
+        $pagination = 12;
         $categories = Category::all();
 
         if (request()->id) {
-            $products = Product::with('categories')->whereHas('categories', function ($query) {
+            $products = Product::where('isActive', 1)->with('categories')->whereHas('categories', function ($query) {
                 $query->where('category_id', request()->id);
             })->paginate($pagination);
             $categoryName = $categories->where('slug', request()->category);
             $categoryName = $categoryName->first() ? $categoryName->first()->name : 'Nepostoji kategorija ' . request()->category;
         } else {
-            $products = Product::paginate($pagination);
+            $products = Product::where('isActive', 1)->paginate($pagination);
             $categoryName = 'Svi artikli';
         }
 
@@ -51,7 +51,11 @@ class ShopController extends Controller
     public function show($productId, $slug)
     {
         $product = Product::where('id', $productId)->firstOrFail();
-        $mightAlsoLike = Category::find($product->categories()->first()->id)->products()->mightAlsoLike()->get();
+        if ($product->categories()->first()) {
+            $mightAlsoLike = Category::find($product->categories()->first()->id)->products()->mightAlsoLike()->get();
+        } else {
+            $mightAlsoLike = Product::inRandomOrder()->take(4)->get();
+        }
 
         SEOMeta::setTitle($product->name);
         SEOMeta::setDescription($product->description);
@@ -69,7 +73,7 @@ class ShopController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $products = Product::search($query)->paginate(12);
+        $products = Product::where('isActive', 1)->search($query)->paginate(12);
         return view('search-results')->with('products', $products);
     }
 }

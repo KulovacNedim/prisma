@@ -53,7 +53,7 @@
             </div>
             <div class="w3-col w3-container l5">
                 @if(Cart::count() > 0)
-                <div class="w3-container w3-card w3-padding">
+                <div class="w3-container w3-light-grey w3-padding">
                     <div class="w3-row">
                         <div class="w3-container w3-border-blue w3-bottombar" style="height: 50px; display:flex; align-items: center">
                             NASTAVITE KAO GOST

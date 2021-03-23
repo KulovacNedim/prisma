@@ -480,6 +480,10 @@ class ProductsController extends VoyagerBaseController
 
   public function destroy(Request $request, $id)
   {
+    // my costumizations - deleting categories
+    CategoryProduct::where('product_id', $id)->delete();
+    // end of my costumizations
+
     $slug = $this->getSlug($request);
 
     $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
