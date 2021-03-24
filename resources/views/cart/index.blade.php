@@ -15,7 +15,7 @@
     <div>
       <ul class="w3-ul" style="margin-top: 8px;">
         @foreach(Cart::content() as $item)
-        <li class="w3-bar" id="{{ ($item->model->id).'-ul' }}">
+        <li class="w3-bar" id="{{ ($item->rowId).'-ul' }}">
           <span onclick="this.parentElement.style.display='none'" class="w3-right">
             <button type="button" class="w3-button w3-bar-item w3-small w3-hide-small w3-blue w3-hover-red x-btn" data-id="{{ $item->rowId }}" style="padding: 7px 15px;">X</button>
           </span>
@@ -30,7 +30,7 @@
               </div>
             </a>
             <div class="w3-bar-item w3-right" style="min-width: 130px">
-              <span class="w3-large w3-right">{{ $item->subtotal }} KM</span>
+              <span class="w3-large w3-right" id="{{ ($item->rowId).'-qty' }}">{{ $item->subtotal }} KM</span>
             </div>
             <div class="w3-bar-item w3-right">
               <span class="w3-large">
@@ -56,7 +56,7 @@
     @if (Cart::count() > 0)
     <div class="w3-row w3-large w3-blue w3-margin-top w3-center">
       <div class="w3-col m6 l6">
-        <p>Total: {{ Cart::subtotal() }} KM</p>
+        <p>Total: <span id="cartSubtotal">{{ Cart::subtotal() }}</span> KM</p>
       </div>
       <div class="w3-col m6 l6" style="min-height: 60px; display: flex; align-items:center; justify-content: center;">
         <a href="{{ route('checkout.index') }}"><button class="w3-button w3-amber w3-hide-medium w3-hover-blue">Pošalji upit</button></a>
@@ -93,7 +93,6 @@
         console.log(id)
         axios.post(`/cart/${id}`)
           .then(function(res) {
-            console.log(res)
             var x = document.getElementsByClassName("count");
             for (var i = 0; i < x.length; i++) {
               if (!x[i].classList.contains('w3-badge')) {
@@ -102,6 +101,7 @@
               x[i].innerHTML = res.data.quantity;
             }
             document.getElementById('countHeader').innerHTML = res.data.quantity;
+            document.getElementById('cartSubtotal').innerHTML = res.data.cartSubtotal;
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
@@ -138,11 +138,18 @@
               quantity: that.value
             })
             .then(function(res) {
+              var z = document.getElementById(id + '-ul');
+              if (that.value == 0) {
+                z.remove();
+              };
+              var q = document.getElementById(id + '-qty');
+              q.innerHTML = res.data.subtotal;
               var x = document.getElementsByClassName("count");
               for (var i = 0; i < x.length; i++) {
                 x[i].innerHTML = res.data.quantity;
               }
               document.getElementById('countHeader').innerHTML = res.data.quantity;
+              document.getElementById('cartSubtotal').innerHTML = res.data.cartSubtotal;
             })
             .catch(function(err) {
               console.log(err);
