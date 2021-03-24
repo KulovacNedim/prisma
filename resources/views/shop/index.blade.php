@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="w3-col w3-container l1 ">
-</div>
-</div>
+
 <div>
   <!-- Sidebar -->
-  <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-animate-left" id="categoriesSidebar" style="padding-top: 19px;">
+  <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-animate-left" id="categoriesSidebar" style="padding-top: 20px;">
 
     <div class="w3-container w3-large w3-red" style="height: 50px; display:flex; align-items: center; position:relative;">
       KATEGORIJE
@@ -29,10 +27,10 @@
 </div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main" style="margin-left:250px; position: relative;">
+<div class="w3-main" style="margin-left:260px; position: relative;">
   <div class="w3-row">
-    <div class="w3-col l11 w3-margin-left">
-      <div class="">
+    <div class="w3-col l11 ">
+      <div class="w3-row">
         <div class="w3-container w3-large w3-blue" style="height: 50px; display:flex; align-items: center">
           {{ strtoupper($categoryName) }}
         </div>
@@ -53,7 +51,7 @@
   <button onclick="w3_open_categories()" class="w3-button w3-circle w3-red w3-hover-red w3-text-white w3-hide-large" style="position: fixed;bottom: 20px; right: 20px;">Kategorije</button>
 
   <div class="w3-row">
-    <div class=" w3-col l11 w3-margin-left w3-center w3-margin-top w3-margin-bottom">
+    <div class=" w3-col l11 w3-center w3-margin-top w3-margin-bottom">
       {{ $products->appends(request()->input())->links() }}
     </div>
   </div>
