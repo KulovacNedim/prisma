@@ -30,8 +30,6 @@
 </head>
 
 <body>
-
-
     {{ menu('main', 'partials.menus.main') }}
 
     <main class="" style="margin-top: 80px;">

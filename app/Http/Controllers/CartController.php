@@ -92,7 +92,12 @@ class CartController extends Controller
         }
 
         Cart::update($id, $request->quantity);
-        return response()->json(['quantity' => Cart::count()]);
+        $newPrice = Cart::get($id);
+        return response()->json([
+            'quantity' => Cart::count(),
+            'subtotal' => round($newPrice->price * $newPrice->qty, 2),
+            'cartSubtotal' => Cart::subtotal(),
+        ]);
     }
 
     /**
@@ -105,6 +110,9 @@ class CartController extends Controller
     {
         Cart::remove($id);
 
-        return response()->json(['quantity' => Cart::count()]);
+        return response()->json([
+            'quantity' => Cart::count(),
+            'cartSubtotal' => Cart::subtotal(),
+        ]);
     }
 }
