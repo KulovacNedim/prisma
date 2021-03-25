@@ -143,7 +143,7 @@
                 z.remove();
               };
               var q = document.getElementById(id + '-qty');
-              q.innerHTML = res.data.subtotal;
+              if (q) q.innerHTML = res.data.subtotal;
               var x = document.getElementsByClassName("count");
               for (var i = 0; i < x.length; i++) {
                 x[i].innerHTML = res.data.quantity;
