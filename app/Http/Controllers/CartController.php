@@ -92,10 +92,16 @@ class CartController extends Controller
         }
 
         Cart::update($id, $request->quantity);
-        $newPrice = Cart::get($id);
+        $subtotal = null;
+        try {
+            $newPrice = Cart::get($id);
+            $subtotal = round($newPrice->price * $newPrice->qty, 2);
+        } catch (\Throwable $th) {
+            error_log('Cart item with id ' . $id . ' deleted');
+        }
         return response()->json([
             'quantity' => Cart::count(),
-            'subtotal' => round($newPrice->price * $newPrice->qty, 2),
+            'subtotal' => $subtotal,
             'cartSubtotal' => Cart::subtotal(),
         ]);
     }

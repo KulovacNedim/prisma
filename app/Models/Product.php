@@ -11,6 +11,8 @@ class Product extends Model
     use HasFactory;
     use SearchableTrait;
 
+    protected $fillable = ['name', 'slug', 'code', 'imageUrl', 'shortDescription', 'description', 'price', 'quantity', 'isActive', 'is_top_product'];
+
     protected $searchable = [
         /**
          * Columns and their priority in search results.

@@ -53,7 +53,7 @@
         </div>
         @endif
 
-        @if(auth()->user()->role_id == 1)
+        @if(auth()->user() && auth()->user()->role_id == 1)
         <div style="position: absolute;top:140px; right: 12px;">
           <a href="{{ asset('/admin/products/'.$product->id.'/edit') }}" target="_blank">
             <span class="w3-button w3-padding w3-round-large w3-red w3-hover-blue w3-text-white w3-center w3-animate-left"><i class="far fa-edit"></i> UREDI</span>
