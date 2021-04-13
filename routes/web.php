@@ -17,15 +17,7 @@ use TCG\Voyager\Facades\Voyager;
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
-// Route::get('/products', [ProductController::class, 'index'])->middleware('auth');
-// Route::get('/products/create',  [ProductController::class, 'create']);
-// Route::post('/products',  [ProductController::class, 'store']);
-// Route::get('/products/{id}',  [ProductController::class, 'show']);
-// Route::delete('/products/{id}',  [ProductController::class, 'destroy']);
-
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product}/{slug}', [App\Http\Controllers\ShopController::class, 'show'])->name('shop.show');
@@ -48,20 +40,12 @@ Route::post('/contact-us', [App\Http\Controllers\ContactUsController::class, 'st
 
 Route::get('/thankyou', [App\Http\Controllers\ConfirmationController::class, 'index'])->name('confirmation.index');
 
-
-// Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
-//     Route::resource('/users', 'UserController', ['except' => ['show', 'create', 'store']]);
-// });
-
-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 Route::post('/voyager/products/remove', [App\Http\Controllers\Voyager\ProductsController::class, 'remove_media'])->name('voyager.products.media.remove');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/my-profile', [App\Http\Controllers\UsersController::class, 'edit'])->name('users.edit');
