@@ -92,36 +92,3 @@
 @include('partials.footer')
 
 @endsection
-
-@section('extra-js')
-<script>
-  function currentSlide(n) {
-    showSlide(slideIndex = n);
-  }
-
-  function showSlide(n) {
-    var i;
-    var slides = document.getElementsByClassName("productSlides");
-    var thumbs = document.getElementsByClassName("thumb");
-    if (n > slides.length) {
-      slideIndex = 1
-    }
-    if (n < 1) {
-      slideIndex = slides.length
-    }
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    for (i = 0; i < thumbs.length; i++) {
-
-      if (thumbs[i].classList.contains("w3-border-blue")) {
-        thumbs[i].className = thumbs[i].className.replace(" w3-border-blue", " w3-border-light-grey");
-      }
-    }
-    slides[slideIndex - 1].style.display = "block";
-    if (thumbs[slideIndex - 1].classList.contains("w3-border-light-grey")) {
-      thumbs[slideIndex - 1].className = thumbs[slideIndex - 1].className.replace("w3-border-light-grey", "w3-border-blue");
-    }
-  }
-</script>
-@endsection
