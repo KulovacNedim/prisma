@@ -28,7 +28,7 @@
         </b>
         <div>
           <p style="width: 100%; min-width: 300px;">
-            {{ $message }}
+            {{ $messages }}
           </p>
         </div>
       </div>

@@ -38,8 +38,10 @@
               </span>
             </div>
           </div>
-          <div class="w3-hide-medium w3-hide-large w3-row" onclick="this.parentElement.style.display='none'">
-            <div class="w3-col s5">{{ $item->model->name }}</div>
+          <div class="w3-hide-medium w3-hide-large w3-row" id="xBtn-{{$item->rowId}}">
+            <a href="{{ route('shop.show', [$item->model->id, $item->model->slug]) }}">
+              <div class="w3-col s5">{{ $item->model->name }}</div>
+            </a>
             <div class="w3-col s3"><input type="text" value="{{ $item-> qty }}" data-id="{{ $item->rowId }}" class="quantity" style="width: 60px; text-align: right"></div>
             <div class="w3-col s3">{{ $item->subtotal }} KM</div>
             <div class="w3-col s1">
@@ -102,6 +104,7 @@
             }
             document.getElementById('countHeader').innerHTML = res.data.quantity;
             document.getElementById('cartSubtotal').innerHTML = res.data.cartSubtotal;
+            document.getElementById(`xBtn-${id}`).parentElement.style.display = 'none';
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
