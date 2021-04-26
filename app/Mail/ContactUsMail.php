@@ -16,7 +16,7 @@ class ContactUsMail extends Mailable
     public $name;
     public $email;
     public $subject;
-    public $message;
+    public $messages;
 
     /**
      * Create a new message instance.
@@ -28,7 +28,7 @@ class ContactUsMail extends Mailable
         $this->name = $request->name;
         $this->email = $request->email;
         $this->subject = $request->subject;
-        $this->message = $request->message;
+        $this->messages = $request->message;
     }
 
     /**
@@ -40,7 +40,7 @@ class ContactUsMail extends Mailable
     {
         return $this
             ->from($this->email, $this->name)
-            ->to('nedim@laravel.demo.ba', 'Elektroprizma')
+            ->to(env('MAIN_MAIL_ACCOUNT'), 'Elektroprizma Tešanj')
             ->subject($this->subject)
             ->view('emails.contact-us');
     }
