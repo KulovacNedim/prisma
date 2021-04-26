@@ -33,7 +33,7 @@ class OrderPlaced extends Mailable
     {
         return $this
             ->from($this->order->billing_email, $this->order->billing_name)
-            ->to('nedim@laravel.demo.ba', 'Elektroprizma')
+            ->to(env('MAIN_MAIL_ACCOUNT'), 'Elektroprizma Te分sanj')
             ->subject('Novi upit')
             ->view('emails.orders.placed');
     }
