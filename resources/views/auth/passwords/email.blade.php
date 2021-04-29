@@ -29,6 +29,11 @@
                             <div class="w3-col m6 l6">
                             </div>
                         </div>
+                        <div class="w3-row">
+                            <div class="w3-col">
+                                <p>Zahtjev za izmjenu password-a biće poslan na Vašu email adresu. Potrebno je da otvorite poslani email i potvrdite izmjenu.</p>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
