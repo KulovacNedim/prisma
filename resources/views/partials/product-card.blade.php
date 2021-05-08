@@ -11,7 +11,7 @@
     </div>
     <div class="w3-row w3-margin-bottom">
       @if($product->new_price)
-      <div class="w3-col s8 m8 l8"><span class="w3-left" style="height: 38px;display: flex; align-items: center"><span class="w3-text-gray" style="margin-right: 10px;"><s>{{ $product->price }} </s></span>{{ $product->presentNewPrice() }}</span></div>
+      <div class="w3-col s8 m8 l8"><span class="w3-left" style="height: 38px;display: flex; align-items: center"><span class="w3-text-gray" style="margin-right: 10px;"><s>{{ substr($product->presentPrice(), 0, -3) }} </s></span>{{ substr($product->presentNewPrice(), 0, -3) }}</span></div>
       @else
       <div class="w3-col s8 m8 l8"><span class="w3-left" style="height: 38px;display: flex; align-items: center">{{ $product->presentPrice() }}</span></div>
       @endif

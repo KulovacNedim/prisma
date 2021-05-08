@@ -30,12 +30,12 @@ class Product extends Model
 
     public function presentPrice()
     {
-        return $this->price . ' KM';
+        return number_format($this->price, 2, '.', '') . ' KM';
     }
 
     public function presentNewPrice()
     {
-        return number_format($this->price, 2, '.', '') . ' KM';
+        return number_format($this->new_price, 2, '.', '') . ' KM';
     }
 
     public function scopeMightAlsoLike($query)
