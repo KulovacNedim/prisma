@@ -40,7 +40,7 @@
             @include('partials.prod-card')
           </a>
           @empty
-          <div>Kategorija trenutno ne sadr탑i artikle</div>
+          <div>Kategorija trenutno ne sadrži artikle</div>
           @endforelse
         </div>
       </div>
