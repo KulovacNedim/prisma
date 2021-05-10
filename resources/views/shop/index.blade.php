@@ -34,13 +34,13 @@
         <div class="w3-container w3-large w3-blue" style="height: 50px; display:flex; align-items: center">
           {{ strtoupper($categoryName) }}
         </div>
-        <div class="w3-row-padding">
+        <div style="padding-top: 20px; margin: 0 auto; display: grid;grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));grid-auto-rows: auto;gap: 20px;">
           @forelse($products as $product)
-          <a href="{{ route('shop.show', [$product->id, $product->slug]) }}" class="w3-col m4 l3 w3-padding-16">
-            @include('partials.product-card')
+          <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
+            @include('partials.prod-card')
           </a>
           @empty
-          <div>Kategorija trenutno ne sadrži artikle</div>
+          <div>Kategorija trenutno ne sadr탑i artikle</div>
           @endforelse
         </div>
       </div>
