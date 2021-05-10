@@ -75,12 +75,10 @@
     <div class="w3-container w3-large w3-bottombar w3-border-blue" style="min-height: 50px; display:flex; align-items: center; margin-top:15px;">
       <h1 class="w3-large w3-text-dark-gray"><b>Možda Vas zanimaju i sljedeći artikli</b></h1>
     </div>
-    <div class="" style="display: flex; flex-wrap: wrap;justify-content:space-around">
+    <div style="padding-top: 20px; margin: 0 auto; display: grid;grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));grid-auto-rows: auto;gap: 20px;">
       @foreach($mightAlsoLike as $product)
       <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
-        <div style="max-width: 200px; margin-top: 16px">
-          @include('partials.product-card')
-        </div>
+        @include('partials.prod-card')
       </a>
       @endforeach
     </div>
@@ -91,4 +89,37 @@
 
 @include('partials.footer')
 
+@endsection
+
+@section('extra-js')
+<script>
+  function currentSlide(n) {
+    showSlide(slideIndex = n);
+  }
+
+  function showSlide(n) {
+    var i;
+    var slides = document.getElementsByClassName("productSlides");
+    var thumbs = document.getElementsByClassName("thumb");
+    if (n > slides.length) {
+      slideIndex = 1
+    }
+    if (n < 1) {
+      slideIndex = slides.length
+    }
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < thumbs.length; i++) {
+
+      if (thumbs[i].classList.contains("w3-border-blue")) {
+        thumbs[i].className = thumbs[i].className.replace(" w3-border-blue", " w3-border-light-grey");
+      }
+    }
+    slides[slideIndex - 1].style.display = "block";
+    if (thumbs[slideIndex - 1].classList.contains("w3-border-light-grey")) {
+      thumbs[slideIndex - 1].className = thumbs[slideIndex - 1].className.replace("w3-border-light-grey", "w3-border-blue");
+    }
+  }
+</script>
 @endsection

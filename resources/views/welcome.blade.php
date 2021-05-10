@@ -69,18 +69,20 @@
             </ul>
         </div>
         <div class="w3-col l9 w3-center">
-            <div class="">
+            <div>
                 <div class="w3-container w3-large w3-blue" style="height: 50px; display:flex; align-items: center">
                     TOP ARTIKLI
                 </div>
                 <div class="w3-row-padding">
-                    @forelse($topProducts as $product)
-                    <a href="{{ route('shop.show', [$product->id, $product->slug]) }}" class="w3-col m6 l3 w3-padding-16">
-                        @include('partials.product-card')
-                    </a>
-                    @empty
-                    <div>Kategorija trenutno ne sadrži artikle</div>
-                    @endforelse
+                    <div style="padding-top: 20px; margin: 0 auto; display: grid;grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));grid-auto-rows: auto;gap: 20px;">
+                        @forelse($topProducts as $product)
+                        <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
+                            @include('partials.prod-card')
+                        </a>
+                        @empty
+                        <div>Kategorija trenutno ne sadrži artikle</div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,7 +92,7 @@
 </div>
 
 <!-- SERVICES AND PROJECTS -->
-<div class="w3-row w3-margin-top w3-margin-bottom">
+<div class="w3-row w3-margin-top" style="margin-bottom: 30px;">
     <div class="w3-col w3-container l1 ">
     </div>
     <div class="w3-col w3-container l10 w3-center">
@@ -155,12 +157,10 @@
                 <div class="w3-container w3-large w3-red " style="height: 50px; display:flex; align-items: center">
                     AKCIJSKI ARTIKLI
                 </div>
-                <div style="display: flex; flex-wrap: wrap;justify-content:space-around">
+                <div style="padding-top: 20px; margin: 0 auto; display: grid;grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));grid-auto-rows: auto;gap: 20px;">
                     @forelse($saleProducts as $product)
-                    <a href="{{ route('shop.show', [$product->id, $product->slug]) }}" class="w3-padding-16">
-                        <div style="max-width: 200px;">
-                            @include('partials.product-card')
-                        </div>
+                    <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
+                        @include('partials.prod-card')
                     </a>
                     @empty
                     <div>Trenutno ne postoje artikli na akciji</div>

@@ -54,7 +54,7 @@ class ShopController extends Controller
         if ($product->categories()->first()) {
             $mightAlsoLike = Category::find($product->categories()->first()->id)->products()->mightAlsoLike()->get();
         } else {
-            $mightAlsoLike = Product::inRandomOrder()->take(4)->get();
+            $mightAlsoLike = Product::inRandomOrder()->take(5)->get();
         }
 
         SEOMeta::setTitle($product->name);
