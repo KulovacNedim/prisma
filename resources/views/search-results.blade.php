@@ -1,4 +1,4 @@
-pclass=@extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="w3-row w3-margin-top w3-margin-bottom">
@@ -13,7 +13,7 @@ pclass=@extends('layouts.app')
         <p class="w3-text-dark-gray">{{ $products->total() }} rezultata za pojam '{{ request()->input('query') }}'</p>
       </b>
     </div>
-    <div class="w3-row">
+    <div class="w3-row" style="margin-left: -16px; margin-right: -16px;">
       @forelse($products as $product)
       <a href="{{ route('shop.show', [$product->id, $product->slug]) }}">
         <div class="w3-col m6 l4 w3-padding">
@@ -24,7 +24,12 @@ pclass=@extends('layouts.app')
             <div class="w3-col m7 w3-padding">
               <p>{{ $product->name }}</p>
               <p>{{ $product->shortDescription }}</p>
-              <p>{{ $product->price }} KM</p>
+              @if($product->new_price)
+              <div class="w3-col s8 m8 l8"><span class="w3-left" style="height: 38px;display: flex; align-items: center"><span class="w3-text-gray" style="margin-right: 10px;"><s>{{ $product->presentPrice() }} </s></span>{{ $product->presentNewPrice() }}</span></div>
+              @else
+              <div class="w3-col s8 m8 l8"><span class="w3-left" style="height: 38px;display: flex; align-items: center">{{ $product->presentPrice() }}</span></div>
+              @endif
+
             </div>
           </div>
         </div>

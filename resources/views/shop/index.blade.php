@@ -28,7 +28,7 @@
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:260px; position: relative;">
-  <div class="w3-row">
+  <div class="w3-container">
     <div class="w3-col l11 ">
       <div class="w3-row">
         <div class="w3-container w3-large w3-blue" style="height: 50px; display:flex; align-items: center">
