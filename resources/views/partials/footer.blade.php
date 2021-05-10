@@ -10,7 +10,7 @@
             <div style="flex: 1; margin: 5px 12px; min-width: 300px;">
               <h6 class="w3-large w3-border-bottom w3-border-orange">{{ strtoupper($sp->title) }}</h6>
               <span style="display: block; margin-bottom: 7px;"><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i> {{ $sp->address }}</span>
-              <span style="display: block; margin-bottom: 7px;"><i class="fas fa-phone-alt" style="margin-right: 5px;"></i> {{ $sp->phone_retail }}</span>
+              <span style="display: block; margin-bottom: 7px;"><i class="fas fa-phone-alt" style="margin-right: 5px;"></i>@if($sp->phone_wholesale) {{ $sp->phone_wholesale }} @else {{ $sp->phone_retail }} @endif </span>
               @if($sp->email)
               <span style="display: block; margin-bottom: 7px;"><i class="fas fa-envelope" style="margin-right: 5px;"></i> {{ $sp->email }}</span>
               @else
@@ -23,13 +23,13 @@
       </div>
       <div class="w3-col l3 w3-hide-small w3-hide-medium" style="display: flex; flex-direction: column; align-items: flex-end; margin-top:12px">
         <p>
-          Potražite nas i na facebooku:
+          Potra탑ite nas i na facebooku:
         </p>
         <div><a href="https://www.facebook.com/profile.php?id=100010520945591" target="_blank"><img src="{{ asset('/img/facebook.png') }}" alt="facebook icon" style="max-width: 150px; cursor: pointer;"></a></div>
       </div>
       <div class="w3-col l3 w3-hide-large" style="display: flex; flex-direction: column; align-items: center;">
         <p>
-          Potražite nas i na facebooku:
+          Potra탑ite nas i na facebooku:
         </p>
         <div><a href="https://www.facebook.com/profile.php?id=100010520945591" target="_blank"><img src="{{ asset('/img/facebook.png') }}" alt="facebook icon" style="max-width: 150px; cursor: pointer;"></a></div>
       </div>
